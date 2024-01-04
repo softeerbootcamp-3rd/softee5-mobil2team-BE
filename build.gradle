@@ -34,3 +34,10 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+bootJar {
+    archiveBaseName.set('mobil2team')
+}
+jar{
+    archiveBaseName.set('mobil2team')
+}
