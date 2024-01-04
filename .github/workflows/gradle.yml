@@ -33,9 +33,6 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-
     # Gradle caching
     - name: Gradle Caching
       uses: actions/cache@v3
@@ -77,7 +74,7 @@ jobs:
       with:
         host: ${{ secrets.EC2_SERVER_HOST }}
         port: 22
-        username: ubuntu
+        username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.PRIVATE_KEY }}
         script: |
             ls
