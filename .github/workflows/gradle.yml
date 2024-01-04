@@ -100,6 +100,5 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.PRIVATE_KEY }}
         script: |
-            ls
             pgrep java | xargs kill -9 
             nohup java -jar /home/${{ secrets.EC2_USERNAME }}/mobil2team.jar > app.log 2>&1 &
