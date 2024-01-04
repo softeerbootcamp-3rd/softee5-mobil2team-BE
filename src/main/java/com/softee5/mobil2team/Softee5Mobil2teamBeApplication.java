@@ -1,4 +1,4 @@
-package com.softee5.softee5mobil2teambe;
+package com.softee5.mobil2team;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
