@@ -11,6 +11,6 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedMethods("*")
-                .allowedOrigins("http://localhost:5173");
+                .allowedOrigins("http://localhost:5173", "https://mobil2team-fe.vercel.app");
     }
 }
