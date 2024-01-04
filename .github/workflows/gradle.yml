@@ -22,19 +22,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    # Checkout
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # JDK Set-up
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-      with:
-        arguments: build
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
 
-    ## gradle caching
+    # Gradle caching
     - name: Gradle Caching
       uses: actions/cache@v3
       with:
@@ -45,21 +47,23 @@ jobs:
          restore-keys: |
            ${{ runner.os }}-gradle-
 
+    # Grant Permission
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew bootJar
+      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
+      with:
+        arguments: build
+
+#    - name: Build with Gradle
+#      run: ./gradlew bootJar
 
     - name: Cleanup Gradle Cache
       if: ${{ always() }}
       run: |
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
           rm -f ~/.gradle/caches/modules-2/gc.properties
-
-    - name: Get Github Actions IP
-      id: ip
-      uses: haythem/public-ip@v1.3
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -69,11 +73,11 @@ jobs:
         aws-region: ap-northeast-2
 
     - name: Deploy
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@v0.1.6
       with:
         host: ${{ secrets.EC2_SERVER_HOST }}
         port: 22
         username: ubuntu
         key: ${{ secrets.PRIVATE_KEY }}
-        envs: GITHUB_SHA
-        #script: |
+        script: |
+            ls
