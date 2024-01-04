@@ -50,9 +50,17 @@ jobs:
 
     # Build Project
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@v2.6.0 #bd5760595778326ba7f1441bcf7e88b49de61a25
-      with:
-        arguments: build
+      run: ./gradlew build -x test
+#      uses: gradle/gradle-build-action@v2.6.0 #bd5760595778326ba7f1441bcf7e88b49de61a25
+#      with:
+#        arguments: build
+
+    # Docker Build
+    - name: Docker Build & Docker Hub Push
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker build -t ${{ secrets.DOCKER_REPO }} .
+        docker push ${{ secrets.DOCKER_REPO }}
 
     - name: Cleanup Gradle Cache
       if: ${{ always() }}
@@ -60,36 +68,18 @@ jobs:
         rm -f ~/.gradle/caches/modules-2/modules-2.lock
         rm -f ~/.gradle/caches/modules-2/gc.properties
 
-    - name: Upload build artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: mobil2team
-        path: build/libs/mobil2team-0.0.1-SNAPSHOT.jar
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-    # Jar 파일(아티팩트) 다운로드
-    - name: Download build artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: mobil2team
-        path: build/libs/
-
-    # 다운받은 Jar 파일 EC2로 복사
-    - name: Upload file to EC2
-      run: |
-        scp -i ${{ secrets.PRIVATE_KEY }} -o StrictHostKeyChecking=no build/libs/mobil2team-0.0.1-SNAPSHOT.jar ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_SERVER_HOST }}:/home/${{ secrets.EC2_USERNAME }}/mobil2team.jar
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_EC2_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_EC2_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-2
-        
+
     - name: Deploy
       uses: appleboy/ssh-action@v0.1.6
       with:
@@ -98,5 +88,8 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.PRIVATE_KEY }}
         script: |
-            pgrep java | xargs kill -9 
-            nohup java -jar /home/${{ secrets.EC2_USERNAME }}/mobil2team.jar > app.log 2>&1 &
+          sudo docker stop $(sudo docker ps -a -q)
+          sudo docker rm $(sudo docker ps -a -q -f status=exited)
+          sudo docker rmi $(sudo docker images -q)
+          sudo docker pull ${{ secrets.DOCKER_REPO }}
+          sudo docker run -d -p 80:80 ${{ secrets.DOCKER_REPO }}
