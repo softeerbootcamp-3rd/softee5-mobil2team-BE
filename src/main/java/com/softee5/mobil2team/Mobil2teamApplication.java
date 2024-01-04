@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Softee5Mobil2teamBeApplication {
+public class Mobil2teamApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Softee5Mobil2teamBeApplication.class, args);
+        SpringApplication.run(Mobil2teamApplication.class, args);
     }
 
 }
