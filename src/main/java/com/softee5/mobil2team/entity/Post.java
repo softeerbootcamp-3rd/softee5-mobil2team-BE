@@ -43,4 +43,15 @@ public class Post {
 
     @Column(name = "like", nullable = false)
     private Integer like;
+
+    @PrePersist
+    protected void onCreate() {
+        createdDatetime = new Date();
+        updatedDatetime = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedDatetime = new Date();
+    }
 }

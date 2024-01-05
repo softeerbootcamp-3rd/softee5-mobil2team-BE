@@ -24,4 +24,15 @@ public class Image {
 
     @Column(name="image_url")
     private String imageUrl;
+
+    @PrePersist
+    protected void onCreate() {
+        createdDatetime = new Date();
+        updatedDatetime = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedDatetime = new Date();
+    }
 }
