@@ -18,7 +18,6 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -44,23 +43,46 @@ jobs:
          restore-keys: |
            ${{ runner.os }}-gradle-
 
-    # Grant Permission
+    # Grant Permission to gradle wrapper
+    # gradle wrapper = 개발자가 특정 버전의 gradle을 미리 설치하지 않고도 gradle 빌드를 실행할 수 있게 해주는 편리한 도구
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
+    # Build Project
     - name: Build with Gradle
-#      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
+      run: ./gradlew build -x test
+#      uses: gradle/gradle-build-action@v2.6.0 #bd5760595778326ba7f1441bcf7e88b49de61a25
 #      with:
 #        arguments: build
-      run:
-        ./gradlew build -x test
 
     - name: Cleanup Gradle Cache
       if: ${{ always() }}
       run: |
-          rm -f ~/.gradle/caches/modules-2/modules-2.lock
-          rm -f ~/.gradle/caches/modules-2/gc.properties
+        rm -f ~/.gradle/caches/modules-2/modules-2.lock
+        rm -f ~/.gradle/caches/modules-2/gc.properties
 
+    # DockerHub 로그인
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    # Docker Build & Push
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKER_REPO }}:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -76,4 +98,8 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.PRIVATE_KEY }}
         script: |
-            ls
+          sudo docker stop $(sudo docker ps -a -q)
+          sudo docker rm $(sudo docker ps -a -q -f status=exited)
+          sudo docker rmi $(sudo docker images -q)
+          sudo docker pull ${{ secrets.DOCKER_REPO }}
+          sudo docker run -d -p 80:80 ${{ secrets.DOCKER_REPO }}
