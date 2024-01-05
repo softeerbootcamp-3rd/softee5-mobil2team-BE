@@ -204,3 +204,41 @@ MODIFY COLUMN created_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL [420
 2024-01-05 16:46:06.670937+09:00 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "insert into station(name, location_x, location_y) values('을지로입구역', 37.5660509513873, 126.982372901787),('을지로3가역', 37.56626594615, 126.990308356253),('을지로4가역', 37.5666369941572, 126.997852780281),('동대문역사문화공원역', 37.5655895229776, 127.009131498424),('신당역', 37.5656540317328, 127.019540574485),('상왕십리역', 37.5644687111181, 127.029031221392),('왕십리역', 37.5610739160043, 127.035978365137),('한양대역', 37.55557788354, 127.043584493543),('뚝섬역', 37.5471882244091, 127.047365178682),('성수역', 37.5445023983984, 127.056090471223),('건대입구역', 37.5404188872176, 127.069173281554),('구의역', 37.5371535596228, 127.086179228767),('강변역', 37.5351692767888, 127.094664569096),('잠실나루역', 37.5206867318088, 127.103811089444),('잠실역', 37.513859279255, 127.101857941447),('잠실새내역', 37.5115672093323, 127.086373867207),('종합운동장역', 37.5111083470758, 127.074289621553),('삼성역', 37.5088619974404, 127.063073009788),('선릉역', 37.5045028775835, 127.048942471228),('역삼역', 37.5007162693593, 127.036618203089),('강남역', 37.4981646510326, 127.028307900881),[*]"; expected "ROW (, (, DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
 insert into station(name, location_x, location_y) values('을지로입구역', 37.5660509513873, 126.982372901787),('을지로3가역', 37.56626594615, 126.990308356253),('을지로4가역', 37.5666369941572, 126.997852780281),('동대문역사문화공원역', 37.5655895229776, 127.009131498424),('신당역', 37.5656540317328, 127.019540574485),('상왕십리역', 37.5644687111181, 127.029031221392),('왕십리역', 37.5610739160043, 127.035978365137),('한양대역', 37.55557788354, 127.043584493543),('뚝섬역', 37.5471882244091, 127.047365178682),('성수역', 37.5445023983984, 127.056090471223),('건대입구역', 37.5404188872176, 127.069173281554),('구의역', 37.5371535596228, 127.086179228767),('강변역', 37.5351692767888, 127.094664569096),('잠실나루역', 37.5206867318088, 127.103811089444),('잠실역', 37.513859279255, 127.101857941447),('잠실새내역', 37.5115672093323, 127.086373867207),('종합운동장역', 37.5111083470758, 127.074289621553),('삼성역', 37.5088619974404, 127.063073009788),('선릉역', 37.5045028775835, 127.048942471228),('역삼역', 37.5007162693593, 127.036618203089),('강남역', 37.4981646510326, 127.028307900881), [42001-224]
+2024-01-05 17:39:09.172951+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:40:20.135248+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:40:41.213283+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:41:34.322472+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:42:08.838423+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:42:23.766883+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:42:26.512330+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:42:31.622968+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:42:34.698115+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:43:09.553204+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:43:58.279172+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:44:08.316549+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:45:20.120633+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:45:37.044787+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "delete [*]* from post"; expected "identifier"; SQL statement:
+delete * from post [42001-224]
+2024-01-05 17:46:42.627833+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]deletePOST  from post"; expected "DELETE, DROP"; SQL statement:
+deletePOST  from post [42001-224]
+2024-01-05 17:52:47.100676+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:52:52.933957+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-01-05 17:52:56.261084+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
