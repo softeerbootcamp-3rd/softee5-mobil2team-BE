@@ -24,4 +24,15 @@ public class Tag {
 
     @Column(name="name", nullable = false)
     private String name;
+
+    @PrePersist
+    protected void onCreate() {
+        createdDatetime = new Date();
+        updatedDatetime = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedDatetime = new Date();
+    }
 }
