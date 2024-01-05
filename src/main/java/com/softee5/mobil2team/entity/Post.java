@@ -14,7 +14,6 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     private Long id;
 
     @Column(name="created_datetime", nullable = false)
