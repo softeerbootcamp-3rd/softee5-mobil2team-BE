@@ -1,11 +1,6 @@
 package com.softee5.mobil2team.controller;
 
-import com.softee5.mobil2team.config.GeneralException;
-import com.softee5.mobil2team.config.ResponseCode;
-import com.softee5.mobil2team.dto.BriefInfoDto;
-import com.softee5.mobil2team.dto.DataResponseDto;
-import com.softee5.mobil2team.dto.StationDto;
-import com.softee5.mobil2team.dto.TestDto;
+import com.softee5.mobil2team.dto.*;
 import com.softee5.mobil2team.service.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,5 +32,16 @@ public class StationController {
         if (x == null || y == null)
             throw new GeneralException(ResponseCode.BAD_REQUEST);
         return new ResponseEntity<>(stationService.nearestStation(x, y), HttpStatus.OK);
+    }
+
+    /* 가까운 역 리스트 */
+    @GetMapping("/near/list")
+    public ResponseEntity<DataResponseDto<StationListDto>> getNearStationList(
+            @RequestParam(value = "x", required = false) Double x,
+            @RequestParam(value = "y", required = false) Double y) {
+        return new ResponseEntity<>(
+                stationService.getNearStationList(x, y),
+                HttpStatus.OK
+        );
     }
 }

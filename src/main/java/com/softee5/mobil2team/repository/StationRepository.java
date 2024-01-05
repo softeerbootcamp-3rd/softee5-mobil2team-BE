@@ -26,4 +26,7 @@ public interface StationRepository extends JpaRepository<Station, Long> {
             "   + POWER(s.location_y - :inputY, 2)) " +
             "LIMIT :cnt", nativeQuery = true)
     List<Long> findNearestStations(@Param("inputX") double inputX, @Param("inputY") double inputY, @Param("cnt") int cnt);
+
+    @Query(value = "SELECT s.id FROM Station s ORDER BY s.id ASC")
+    List<Long> findAllId();
 }
