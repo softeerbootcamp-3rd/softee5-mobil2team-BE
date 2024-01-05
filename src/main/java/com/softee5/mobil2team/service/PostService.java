@@ -1,6 +1,8 @@
 package com.softee5.mobil2team.service;
 
 import com.softee5.mobil2team.dto.DataResponseDto;
+import com.softee5.mobil2team.dto.ImageDto;
+import com.softee5.mobil2team.dto.ImageListDto;
 import com.softee5.mobil2team.dto.PostDto;
 import com.softee5.mobil2team.entity.Image;
 import com.softee5.mobil2team.entity.Post;
@@ -13,6 +15,8 @@ import com.softee5.mobil2team.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @RequiredArgsConstructor
@@ -57,6 +61,20 @@ public class PostService {
         postRepository.save(post);
 
         return DataResponseDto.of(null);
+    }
+
+    /* 이미지 리스트 조회 */
+    public DataResponseDto<ImageListDto> getAllImages() {
+
+        List<Image> imageList = imageRepository.findAll();
+
+        List<ImageDto> dtoList = new ArrayList<>();
+        for (Image i : imageList) {
+            ImageDto dto = new ImageDto(i.getId(), i.getImageUrl());
+            dtoList.add(dto);
+        }
+
+        return DataResponseDto.of(new ImageListDto(dtoList));
     }
 
 }
