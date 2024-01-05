@@ -31,4 +31,15 @@ public class Station {
 
     @Column(name="location_y", nullable = false)
     private Double locationY;
+
+    @PrePersist
+    protected void onCreate() {
+        createdDatetime = new Date();
+        updatedDatetime = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedDatetime = new Date();
+    }
 }
