@@ -4,6 +4,7 @@ import com.softee5.mobil2team.dto.BriefInfoDto;
 import com.softee5.mobil2team.entity.Station;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,4 +20,10 @@ public interface StationRepository extends JpaRepository<Station, Long> {
             "LEFT JOIN post p ON s.id = p.station_id AND p.created_datetime >= CURRENT_TIMESTAMP - INTERVAL '2' HOUR " +
             "GROUP BY s.id, s.name", nativeQuery = true)
     List<BriefInfoDto.StationInfo> getBriefStationInfo();
+
+    @Query(value = "SELECT s FROM Station s " +
+            "ORDER BY SQRT(CAST(POW(s.locationX - :inputX, 2) as DOUBLE)" +
+            "   + CAST(POW(s.locationY - :inputY, 2) as DOUBLE)) " +
+            "LIMIT :cnt")
+    List<Station> findNearestStations(@Param("inputX") double inputX, @Param("inputY") double inputY, @Param("cnt") int cnt);
 }
