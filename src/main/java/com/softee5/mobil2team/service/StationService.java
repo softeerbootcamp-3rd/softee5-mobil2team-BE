@@ -1,7 +1,10 @@
 package com.softee5.mobil2team.service;
 
+import com.softee5.mobil2team.config.GeneralException;
+import com.softee5.mobil2team.config.ResponseCode;
 import com.softee5.mobil2team.dto.BriefInfoDto;
 import com.softee5.mobil2team.dto.DataResponseDto;
+import com.softee5.mobil2team.dto.StationDto;
 import com.softee5.mobil2team.dto.StationListDto;
 import com.softee5.mobil2team.entity.Station;
 import com.softee5.mobil2team.repository.StationRepository;
@@ -21,6 +24,13 @@ public class StationService {
         return DataResponseDto.of(new BriefInfoDto(stationRepository.getBriefStationInfo()));
     }
 
+    public DataResponseDto<StationDto> nearestStation(double x, double y) {
+        List<Long> nearStation = stationRepository.findNearestStations(x, y, 1);
+        if (nearStation == null || nearStation.isEmpty())
+            throw new GeneralException(ResponseCode.INTERNAL_ERROR);
+        return DataResponseDto.of(new StationDto(nearStation.get(0)));
+    }
+  
     /* 가까운 역 리스트 */
     public DataResponseDto<StationListDto> getNearStationList(Double currentX, Double currentY) {
 
@@ -39,5 +49,4 @@ public class StationService {
         List<Long> list = stationRepository.findAllId();
         return list;
     }
-
 }

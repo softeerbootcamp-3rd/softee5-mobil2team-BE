@@ -24,9 +24,14 @@ public class StationController {
         return new ResponseEntity<>(stationService.getBriefInfo(), HttpStatus.OK);
     }
 
-    @GetMapping("/nearStation")
-    public ResponseEntity<DataResponseDto<StationDto>> nearStation() {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    @GetMapping("/near")
+    public ResponseEntity<DataResponseDto<StationDto>> nearStation(
+            @RequestParam Double x,
+            @RequestParam Double y
+    ) {
+        if (x == null || y == null)
+            throw new GeneralException(ResponseCode.BAD_REQUEST);
+        return new ResponseEntity<>(stationService.nearestStation(x, y), HttpStatus.OK);
     }
 
     /* 가까운 역 리스트 */

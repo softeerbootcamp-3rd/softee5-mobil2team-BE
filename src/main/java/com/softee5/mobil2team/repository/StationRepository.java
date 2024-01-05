@@ -21,12 +21,12 @@ public interface StationRepository extends JpaRepository<Station, Long> {
             "GROUP BY s.id, s.name", nativeQuery = true)
     List<BriefInfoDto.StationInfo> getBriefStationInfo();
 
-    @Query(value = "SELECT s.id FROM Station s "
-            + "ORDER BY SQRT(POWER(s.location_x - :inputX, 2)) + SQRT(POWER(s.location_y - :inputY, 2)) ASC "
-            + "LIMIT :cnt", nativeQuery = true)
+    @Query(value = "SELECT id FROM station s " +
+            "ORDER BY SQRT(POWER(s.location_x - :inputX, 2)" +
+            "   + POWER(s.location_y - :inputY, 2)) " +
+            "LIMIT :cnt", nativeQuery = true)
     List<Long> findNearestStations(@Param("inputX") double inputX, @Param("inputY") double inputY, @Param("cnt") int cnt);
 
     @Query(value = "SELECT s.id FROM Station s ORDER BY s.id ASC")
     List<Long> findAllId();
-
 }
