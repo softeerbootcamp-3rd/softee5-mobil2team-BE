@@ -40,8 +40,8 @@ public class Post {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "like", nullable = false)
-    private Integer like;
+    @Column(name = "liked", nullable = false)
+    private Integer liked;
 
     @PrePersist
     protected void onCreate() {
