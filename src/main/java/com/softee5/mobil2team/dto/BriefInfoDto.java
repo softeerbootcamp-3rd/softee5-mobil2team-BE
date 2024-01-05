@@ -12,16 +12,11 @@ public class BriefInfoDto {
 
     private List<StationInfo> stations;
 
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class StationInfo {
+    public interface StationInfo {
 
-        private Long stationId;
-        private String stationName;
-        private Long tagId;
-        private Integer contentCount;
+        Long getStationId();
+        String getStationName();
+        Long getTagId();
+        Integer getContentCount();
     }
 }
