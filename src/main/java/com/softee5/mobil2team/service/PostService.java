@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @RequiredArgsConstructor
@@ -75,6 +76,24 @@ public class PostService {
         }
 
         return DataResponseDto.of(new ImageListDto(dtoList));
+    }
+
+    /* 좋아요 추가 */
+    public boolean updateLiked(Long id, int cnt) {
+        // 게시글 id로 포스트 조회
+        Optional<Post> post = postRepository.findById(id);
+
+        // 게시글 있을 경우 좋아요 수 업데이트
+        if (post.isPresent()) {
+            int liked = post.get().getLiked();
+            post.get().setLiked(liked + cnt);
+
+            postRepository.save(post.get());
+
+            return true;
+        }
+
+        return false;
     }
 
 }
