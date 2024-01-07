@@ -53,7 +53,10 @@ public class StationController {
 
     /* 역 별 태그 리스트 */
     @GetMapping("/tag/list")
-    public ResponseEntity<DataResponseDto<TagListDto>> getAllTags(@RequestParam Long id) {
+    public ResponseEntity<DataResponseDto<TagListDto>> getAllTags(@RequestParam(value = "id") Long id) {
+        if (id < 0 || id > 43) {
+            throw new GeneralException(ResponseCode.BAD_REQUEST, "존재하지 않는 역 ID입니다.");
+        }
         return new ResponseEntity<>(tagService.getTagList(id), HttpStatus.OK);
     }
 }
