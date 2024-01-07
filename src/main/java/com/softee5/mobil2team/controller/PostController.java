@@ -4,6 +4,9 @@ import com.softee5.mobil2team.config.ResponseCode;
 import com.softee5.mobil2team.dto.*;
 import com.softee5.mobil2team.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +47,15 @@ public class PostController {
         }
 
         return new ResponseEntity<>(ResponseDto.of(false, ResponseCode.BAD_REQUEST, "존재하지 않는 포스트입니다."), HttpStatus.BAD_REQUEST);
+    }
+
+    /* 게시글 리스트 조회 */
+    @GetMapping("/postList")
+    public ResponseEntity<PageResponseDto<PostListDto>> getPostList(
+            @RequestParam(value = "stationId") Long id,
+            @RequestParam(value = "pageSize") Integer pageSize,
+            @RequestParam(value = "pageNumber") Integer pageNumber,
+            @RequestParam(value = "tagId", required = false) Long tagId) {
+        return new ResponseEntity<>(postService.getPostList(id, pageSize, pageNumber, tagId), HttpStatus.OK);
     }
 }

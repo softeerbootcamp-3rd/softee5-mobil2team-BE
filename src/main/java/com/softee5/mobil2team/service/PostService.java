@@ -1,9 +1,6 @@
 package com.softee5.mobil2team.service;
 
-import com.softee5.mobil2team.dto.DataResponseDto;
-import com.softee5.mobil2team.dto.ImageDto;
-import com.softee5.mobil2team.dto.ImageListDto;
-import com.softee5.mobil2team.dto.PostDto;
+import com.softee5.mobil2team.dto.*;
 import com.softee5.mobil2team.entity.Image;
 import com.softee5.mobil2team.entity.Post;
 import com.softee5.mobil2team.entity.Station;
@@ -13,12 +10,13 @@ import com.softee5.mobil2team.repository.PostRepository;
 import com.softee5.mobil2team.repository.StationRepository;
 import com.softee5.mobil2team.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -96,4 +94,39 @@ public class PostService {
         return false;
     }
 
+    /* 게시글 리스트 조회 */
+    public PageResponseDto<PostListDto> getPostList(Long stationId, Integer pageSize, Integer pageNumber, Long tagId) {
+        /* pageable 객체 생성 */
+        Pageable pageable = PageRequest.of(pageNumber == 0 ? 0 : pageNumber - 1,
+                pageSize, Sort.by("createdDatetime").descending());
+
+        // 현재 시간에서 24시간 전 계산
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.HOUR_OF_DAY, -72);
+        Date date = calendar.getTime();
+
+
+        Page<Post> postList;
+        if (tagId != null) {
+            // stationId & tagId로 포스트 조회
+            postList = postRepository.findByStationIdAndTagIdAndCreatedDatetimeAfter(stationId, tagId, pageable, date);
+
+        } else {
+            // stationId로 포스트 조회
+            postList = postRepository.findByStationIdAndCreatedDatetimeAfter(stationId, pageable, date);
+        }
+
+        List<PostInfoDto> results = new ArrayList<>();
+
+        for (Post p : postList) {
+            String imageUrl = p.getImage() != null ? p.getImage().getImageUrl() : null;
+            Long tag = p.getTag() != null ? p.getTag().getId() : null;
+            PostInfoDto postInfoDto = new PostInfoDto(p.getId(), p.getNickname(), p.getCreatedDatetime(),
+                    p.getContent(), imageUrl, tag, p.getLiked());
+            results.add(postInfoDto);
+        }
+
+        PageInfoDto pageInfoDto = new PageInfoDto(pageNumber, pageSize, postList.getTotalElements(), postList.getTotalPages());
+        return PageResponseDto.of(new PostListDto(results), pageInfoDto);
+    }
 }
