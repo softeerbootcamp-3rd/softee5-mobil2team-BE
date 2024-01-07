@@ -40,8 +40,8 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         port: 22
         key: ${{ secrets.PRIVATE_KEY }}
-        source: "data/demo.mv.db,demo.trace.db"
-        target: "data/"
+        source: "data/demo.mv.db,data/demo.trace.db"
+        target: "/"
 
     # Gradle caching
     - name: Gradle Caching
