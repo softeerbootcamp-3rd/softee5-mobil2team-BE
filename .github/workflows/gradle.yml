@@ -32,6 +32,17 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    # scp actions
+    - name: copy db files via ssh
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.EC2_SERVER_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        port: 22
+        key: ${{ secrets.PRIVATE_KEY }}
+        source: "data/demo.mv.db,demo.trace.db"
+        target: "data/"
+
     # Gradle caching
     - name: Gradle Caching
       uses: actions/cache@v3
