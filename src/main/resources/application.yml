@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:./data/demo
+    url: 'jdbc:h2:tcp://13.209.90.251:80/~/data/demo'
     username: sa
     password:
 
