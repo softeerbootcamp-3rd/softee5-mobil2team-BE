@@ -1,6 +1,6 @@
 spring:
   datasource:
-    jdbc-url: 'jdbc:h2:tcp://13.209.90.251:1521/default'
+    url: 'jdbc:h2:tcp://13.209.90.251:1521/default'
     driver-class-name: org.h2.Driver
     username: sa
     password:
