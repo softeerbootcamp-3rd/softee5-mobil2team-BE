@@ -4,6 +4,7 @@ import com.softee5.mobil2team.config.GeneralException;
 import com.softee5.mobil2team.config.ResponseCode;
 import com.softee5.mobil2team.dto.*;
 import com.softee5.mobil2team.service.PostService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/post")
+@Tag(name = "02. 와글와글 관련 API", description = "와글와글 포스트와 관련된 API들")
 public class PostController {
 
     private final PostService postService;

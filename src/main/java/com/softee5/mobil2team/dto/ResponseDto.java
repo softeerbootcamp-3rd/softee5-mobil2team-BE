@@ -1,6 +1,7 @@
 package com.softee5.mobil2team.dto;
 
 import com.softee5.mobil2team.config.ResponseCode;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -10,8 +11,13 @@ import lombok.ToString;
 @RequiredArgsConstructor
 public class ResponseDto {
 
+    @Schema(description = "성공 여부", example = "true")
     private final Boolean success;
+
+    @Schema(description = "결과 코드", example = "200")
     private final Integer code;
+
+    @Schema(description = "결과 메시지", example = "OK")
     private final String message;
 
     public static ResponseDto of(Boolean success, ResponseCode code) {
