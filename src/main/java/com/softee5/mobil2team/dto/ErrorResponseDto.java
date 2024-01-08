@@ -5,15 +5,15 @@ import com.softee5.mobil2team.config.ResponseCode;
 public class ErrorResponseDto extends ResponseDto {
 
     private ErrorResponseDto(ResponseCode errorResponseCode) {
-        super(false, errorResponseCode.getCode(), errorResponseCode.getMessage(), null);
+        super(false, errorResponseCode.getCode(), errorResponseCode.getMessage());
     }
 
     private ErrorResponseDto(ResponseCode errorResponseCode, Exception e) {
-        super(false, errorResponseCode.getCode(), errorResponseCode.getMessage(e), null);
+        super(false, errorResponseCode.getCode(), errorResponseCode.getMessage(e));
     }
 
     private ErrorResponseDto(ResponseCode errorResponseCode, String message) {
-        super(false, errorResponseCode.getCode(), errorResponseCode.getMessage(message), null);
+        super(false, errorResponseCode.getCode(), errorResponseCode.getMessage(message));
     }
 
 

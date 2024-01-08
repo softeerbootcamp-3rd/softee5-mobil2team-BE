@@ -54,7 +54,7 @@ public class PostController {
     /* 게시글 리스트 조회 */
     @GetMapping("/postList")
     @Operation(summary = "게시글 리스트 조회", description = "해당하는 역의 24시간 이내에 작성된 게시글 리스트 조회")
-    public ResponseEntity<DataResponseDto<PostListDto>> getPostList(
+    public ResponseEntity<PageResponseDto<PostListDto>> getPostList(
             @RequestParam(value = "stationId") @Parameter(description = "역 ID", required = true, example = "3") Long id,
             @RequestParam(value = "pageSize") @Parameter(description = "페이지 한 개당 요청할 게시글 수", required = true, example = "5") Integer pageSize,
             @RequestParam(value = "pageNumber") @Parameter(description = "요청하는 페이지 번호 (1부터 시작)", required = true, example = "1") Integer pageNumber,
