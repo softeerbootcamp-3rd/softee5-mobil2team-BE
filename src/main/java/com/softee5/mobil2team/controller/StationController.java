@@ -16,7 +16,6 @@ import javax.xml.crypto.Data;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/station")
-@CrossOrigin(origins = "http://localhost:5173")
 public class StationController {
 
     @Autowired
