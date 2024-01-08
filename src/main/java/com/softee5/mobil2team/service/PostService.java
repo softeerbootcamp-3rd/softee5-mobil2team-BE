@@ -127,7 +127,7 @@ public class PostService {
     }
 
     /* 게시글 리스트 조회 */
-    public PageResponseDto<PostListDto> getPostList(Long stationId, Integer pageSize, Integer pageNumber, Long tagId) {
+    public DataResponseDto<PostListDto> getPostList(Long stationId, Integer pageSize, Integer pageNumber, Long tagId) {
         // stationID 예외처리
         if (!stationRepository.existsById(stationId)) {
             throw new GeneralException(ResponseCode.BAD_REQUEST, "존재하지 않는 역 ID입니다.");
@@ -169,6 +169,6 @@ public class PostService {
         }
 
         PageInfoDto pageInfoDto = new PageInfoDto(pageNumber, pageSize, postList.getTotalElements(), postList.getTotalPages());
-        return PageResponseDto.of(new PostListDto(results), pageInfoDto);
+        return DataResponseDto.of(new PostListDto(results), pageInfoDto);
     }
 }

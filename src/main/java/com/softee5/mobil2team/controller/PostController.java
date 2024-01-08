@@ -50,7 +50,7 @@ public class PostController {
 
     /* 게시글 리스트 조회 */
     @GetMapping("/postList")
-    public ResponseEntity<PageResponseDto<PostListDto>> getPostList(
+    public ResponseEntity<DataResponseDto<PostListDto>> getPostList(
             @RequestParam(value = "stationId") Long id,
             @RequestParam(value = "pageSize") Integer pageSize,
             @RequestParam(value = "pageNumber") Integer pageNumber,

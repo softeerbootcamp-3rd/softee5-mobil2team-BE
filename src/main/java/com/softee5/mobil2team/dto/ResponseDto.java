@@ -19,16 +19,21 @@ public class ResponseDto {
 
     @Schema(description = "결과 메시지", example = "OK")
     private final String message;
+    private final PageInfoDto pageInfoDto;
 
     public static ResponseDto of(Boolean success, ResponseCode code) {
-        return new ResponseDto(success, code.getCode(), code.getMessage());
+        return new ResponseDto(success, code.getCode(), code.getMessage(), null);
+    }
+
+    public static ResponseDto of(Boolean success, ResponseCode code, PageInfoDto pageInfoDto) {
+        return new ResponseDto(success, code.getCode(), code.getMessage(), pageInfoDto);
     }
 
     public static ResponseDto of(Boolean success, ResponseCode errorCode, Exception e) {
-        return new ResponseDto(success, errorCode.getCode(), errorCode.getMessage(e));
+        return new ResponseDto(success, errorCode.getCode(), errorCode.getMessage(e), null);
     }
 
     public static ResponseDto of(Boolean success, ResponseCode errorCode, String message) {
-        return new ResponseDto(success, errorCode.getCode(), errorCode.getMessage(message));
+        return new ResponseDto(success, errorCode.getCode(), errorCode.getMessage(message), null);
     }
 }
