@@ -27,7 +27,7 @@ public class TestController {
     }
 
     @PostMapping("/test")
-    @Operation(summary = "Get 테스트", description = "POST 메서드 테스트")
+    @Operation(summary = "Post 테스트", description = "POST 메서드 테스트")
     public ResponseEntity<DataResponseDto<TestDto>> postTest() {
         return new ResponseEntity<>(testService.testMethod(), HttpStatus.OK);
     }
