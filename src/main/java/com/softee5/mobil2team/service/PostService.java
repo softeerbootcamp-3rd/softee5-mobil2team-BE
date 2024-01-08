@@ -66,19 +66,6 @@ public class PostService {
         post.setContent(postDto.getContent());
         post.setLiked(0);
 
-//        Station station = stationRepository.findById(postDto.getStationId()).orElse(null);
-//        Tag tag = tagRepository.findById(postDto.getTagId()).orElse(null);
-//        Image image;
-//        if (postDto.getImageId() != null) {
-//            image = imageRepository.findById(postDto.getImageId()).orElse(null);
-//        } else {
-//            image = null;
-//        }
-//        post.setStation(station);
-//        post.setTag(tag);
-//        post.setImage(image);
-
-        // 필수
         post.setStation(Station.builder().id(postDto.getStationId()).build()); // 필수
         post.setTag(postDto.getTagId() != null ? Tag.builder().id(postDto.getTagId()).build() : null); // 선택
         post.setImage(postDto.getImageId() != null ? Image.builder().id(postDto.getImageId()).build() : null); // 선택
@@ -92,12 +79,6 @@ public class PostService {
     public DataResponseDto<ImageListDto> getAllImages() {
 
         List<Image> imageList = imageRepository.findAll();
-
-//        List<ImageDto> dtoList = new ArrayList<>();
-//        for (Image i : imageList) {
-//            ImageDto dto = new ImageDto(i.getId(), i.getImageUrl());
-//            dtoList.add(dto);
-//        }
 
         // stream 사용
         List<ImageDto> dtoList = imageList

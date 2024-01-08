@@ -51,9 +51,6 @@ jobs:
     # Build Project
     - name: Build with Gradle
       run: ./gradlew build -x test
-#      uses: gradle/gradle-build-action@v2.6.0 #bd5760595778326ba7f1441bcf7e88b49de61a25
-#      with:
-#        arguments: build
 
     - name: Cleanup Gradle Cache
       if: ${{ always() }}
