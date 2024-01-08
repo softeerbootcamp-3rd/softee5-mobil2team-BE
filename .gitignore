@@ -80,3 +80,4 @@ fabric.properties
 .gradle/
 .idea/
 build/
+*.pem
