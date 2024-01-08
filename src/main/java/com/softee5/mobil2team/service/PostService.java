@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -90,12 +91,17 @@ public class PostService {
 
         List<Image> imageList = imageRepository.findAll();
 
-        List<ImageDto> dtoList = new ArrayList<>();
-        for (Image i : imageList) {
-            ImageDto dto = new ImageDto(i.getId(), i.getImageUrl());
-            dtoList.add(dto);
-        }
+//        List<ImageDto> dtoList = new ArrayList<>();
+//        for (Image i : imageList) {
+//            ImageDto dto = new ImageDto(i.getId(), i.getImageUrl());
+//            dtoList.add(dto);
+//        }
+
         // stream 사용
+        List<ImageDto> dtoList = imageList
+                .stream()
+                .map(d -> new ImageDto(d.getId(), d.getImageUrl()))
+                .collect(Collectors.toList());
 
         return DataResponseDto.of(new ImageListDto(dtoList));
     }
