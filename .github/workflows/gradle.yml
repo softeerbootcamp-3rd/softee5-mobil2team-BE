@@ -99,6 +99,7 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         script: |
           sudo docker stop $(sudo docker ps -a -q)
+          sudo docker start h2
           sudo docker rm $(sudo docker ps -a -q -f status=exited)
           sudo docker rmi $(sudo docker images -q)
           sudo docker pull ${{ secrets.DOCKER_REPO }}
