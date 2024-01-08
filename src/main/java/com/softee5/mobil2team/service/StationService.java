@@ -2,16 +2,11 @@ package com.softee5.mobil2team.service;
 
 import com.softee5.mobil2team.config.GeneralException;
 import com.softee5.mobil2team.config.ResponseCode;
-import com.softee5.mobil2team.dto.BriefInfoDto;
-import com.softee5.mobil2team.dto.DataResponseDto;
-import com.softee5.mobil2team.dto.StationDto;
-import com.softee5.mobil2team.dto.StationListDto;
-import com.softee5.mobil2team.entity.Station;
+import com.softee5.mobil2team.dto.*;
 import com.softee5.mobil2team.repository.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,11 +19,15 @@ public class StationService {
         return DataResponseDto.of(new BriefInfoDto(stationRepository.getBriefStationInfo()));
     }
 
-    public DataResponseDto<StationDto> nearestStation(double x, double y) {
+    public DataResponseDto<StationDto> getNearestStation(double x, double y) {
         List<Long> nearStation = stationRepository.findNearestStations(x, y, 1);
         if (nearStation == null || nearStation.isEmpty())
             throw new GeneralException(ResponseCode.INTERNAL_ERROR);
         return DataResponseDto.of(new StationDto(nearStation.get(0)));
+    }
+
+    public DataResponseDto<HotStationDto> getHotStation() {
+        return DataResponseDto.of(new HotStationDto(stationRepository.getHotStations()));
     }
   
     /* 가까운 역 리스트 */
