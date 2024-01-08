@@ -49,9 +49,15 @@ public class StationController {
 
     /* 가까운 역 리스트 */
     @GetMapping("/near/list")
+    @Operation(summary = "가까운 역 리스트",
+            description = "주어진 위치를 기준으로 전체 지하철 역들을 가까운 순으로 조회, 위치 데이터 없으면 index 순으로 정렬")
     public ResponseEntity<DataResponseDto<StationListDto>> getNearStationList(
-            @RequestParam(value = "x", required = false) Double x,
-            @RequestParam(value = "y", required = false) Double y) {
+            @RequestParam(value = "x", required = false)
+            @Parameter(description = "사용자의 X좌표", required = false, example = "37.5118239121138")
+            Double x,
+            @RequestParam(value = "y", required = false)
+            @Parameter(description = "사용자의 Y좌표", required = false, example = "127.059159043842")
+            Double y) {
         return new ResponseEntity<>(
                 stationService.getNearStationList(x, y),
                 HttpStatus.OK
