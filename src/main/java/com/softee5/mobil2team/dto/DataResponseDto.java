@@ -8,14 +8,25 @@ public class DataResponseDto<T> extends ResponseDto {
 
     private final T data;
 
-    DataResponseDto(T data) {
-        super(true, ResponseCode.OK.getCode(), ResponseCode.OK.getMessage());
+    private DataResponseDto(T data) {
+        super(true, ResponseCode.OK.getCode(), ResponseCode.OK.getMessage(), null);
         this.data = data;
     }
 
-    DataResponseDto(T data, String message) {
-        super(true, ResponseCode.OK.getCode(), message);
+    private DataResponseDto(T data, String message) {
+        super(true, ResponseCode.OK.getCode(), message, null);
         this.data = data;
+    }
+
+    private DataResponseDto(T data, PageInfoDto pageInfoDto) {
+        super(true, ResponseCode.OK.getCode(), ResponseCode.OK.getMessage(), pageInfoDto);
+        this.data = data;
+    }
+
+    private DataResponseDto(T data, String message, PageInfoDto pageInfoDto) {
+        super(true, ResponseCode.OK.getCode(), message, pageInfoDto);
+        this.data = data;
+
     }
 
     public static <T> DataResponseDto<T> of(T data) {
@@ -24,6 +35,14 @@ public class DataResponseDto<T> extends ResponseDto {
 
     public static <T> DataResponseDto<T> of(T data, String message) {
         return new DataResponseDto<>(data, message);
+    }
+
+    public static <T> DataResponseDto<T> of(T data, PageInfoDto pageInfoDto) {
+        return new DataResponseDto<>(data, pageInfoDto);
+    }
+
+    public static <T> DataResponseDto<T> of(T data, String message, PageInfoDto pageInfoDto) {
+        return new DataResponseDto<>(data, message, pageInfoDto);
     }
 
     public static <T> DataResponseDto<T> empty() {
