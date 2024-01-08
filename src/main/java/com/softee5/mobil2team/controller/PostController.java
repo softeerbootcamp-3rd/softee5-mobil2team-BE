@@ -22,6 +22,7 @@ public class PostController {
 
     /* 글 업로드 */
     @PostMapping("/upload")
+    @Operation(summary = "글 업로드", description = "특정 지하철 역에 해당하는 글 작성")
     public ResponseEntity<DataResponseDto<Void>> uploadPost(@RequestBody PostDto postDto) {
         return new ResponseEntity<>(
                 postService.uploadPost(postDto),
@@ -31,6 +32,7 @@ public class PostController {
 
     /* 모든 이미지 조회 */
     @GetMapping("/images")
+    @Operation(summary = "모든 이미지 조회", description = "DB에 있는 모든 이미지 리스트 조회")
     public ResponseEntity<DataResponseDto<ImageListDto>> getAllImages() {
         return new ResponseEntity<>(
                 postService.getAllImages(),
