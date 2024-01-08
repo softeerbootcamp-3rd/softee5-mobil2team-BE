@@ -1,5 +1,6 @@
 package com.softee5.mobil2team.controller;
 
+import com.softee5.mobil2team.config.GeneralException;
 import com.softee5.mobil2team.config.ResponseCode;
 import com.softee5.mobil2team.dto.*;
 import com.softee5.mobil2team.service.PostService;
@@ -42,8 +43,7 @@ public class PostController {
         if (postService.updateLiked(id, cnt)) {
             return new ResponseEntity<>(ResponseDto.of(true, ResponseCode.OK, "좋아요 수 업데이트 성공"), HttpStatus.OK);
         }
-
-        return new ResponseEntity<>(ResponseDto.of(false, ResponseCode.BAD_REQUEST, "존재하지 않는 포스트입니다."), HttpStatus.BAD_REQUEST);
+        throw new GeneralException(ResponseCode.BAD_REQUEST, "존재하지 않는 포스트입니다.");
     }
 
     /* 게시글 리스트 조회 */
