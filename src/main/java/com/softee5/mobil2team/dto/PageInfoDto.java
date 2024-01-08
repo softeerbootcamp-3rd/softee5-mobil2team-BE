@@ -10,17 +10,18 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(name = "Page Info Response")
 public class PageInfoDto {
-
-    @Schema(description = "현재 페이지, 1부터 시작", example = "1")
+  
+    @Schema(description = "요청하는 페이지 번호", example = "1")
     private Integer page;
-
-    @Schema(description = "페이지 사이즈", example = "20")
+  
+    @Schema(description = "한 페이지 당 조회할 데이터 수", example = "20")
     private Integer size;
-
-    @Schema(description = "총 정보 개수", example = "95")
+  
+    @Schema(description = "전체 데이터 개수 (페이지 관계 X)", example = "95")
     private Long totalElements;
-
-    @Schema(description = "총 페이지 개수", example = "5")
+  
+    @Schema(description = "전체 페이지 수", example = "5")
     private Integer totalPages;
 }
