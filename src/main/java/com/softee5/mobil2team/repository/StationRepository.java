@@ -27,6 +27,10 @@ public interface StationRepository extends JpaRepository<Station, Long> {
             "LIMIT :cnt", nativeQuery = true)
     List<Long> findNearestStations(@Param("inputX") double inputX, @Param("inputY") double inputY, @Param("cnt") int cnt);
 
+    @Query(value = "SELECT s.id from Station s join Post p on p.station_id = s.id AND p.created_datetime >= CURRENT_TIMESTAMP - INTERVAL '2' HOUR"+
+            "   group by s.id order by count(s.id) desc limit 3", nativeQuery = true)
+    List<Long> getHotStations();
+
     @Query(value = "SELECT s.id FROM Station s ORDER BY s.id ASC")
     List<Long> findAllId();
 }

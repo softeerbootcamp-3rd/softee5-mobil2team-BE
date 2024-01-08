@@ -18,7 +18,7 @@ import javax.xml.crypto.Data;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/station")
+@RequestMapping("/v1/station")
 public class StationController {
 
     @Autowired
@@ -26,18 +26,23 @@ public class StationController {
     private final TagService tagService;
 
     @GetMapping("/briefInfo")
-    public ResponseEntity<DataResponseDto<BriefInfoDto>> getTest() {
+    public ResponseEntity<DataResponseDto<BriefInfoDto>> getBriefInfo() {
         return new ResponseEntity<>(stationService.getBriefInfo(), HttpStatus.OK);
     }
 
     @GetMapping("/near")
-    public ResponseEntity<DataResponseDto<StationDto>> nearStation(
+    public ResponseEntity<DataResponseDto<StationDto>> getNearStation(
             @RequestParam Double x,
             @RequestParam Double y
     ) {
         if (x == null || y == null)
             throw new GeneralException(ResponseCode.BAD_REQUEST);
-        return new ResponseEntity<>(stationService.nearestStation(x, y), HttpStatus.OK);
+        return new ResponseEntity<>(stationService.getNearestStation(x, y), HttpStatus.OK);
+    }
+
+    @GetMapping("/hot")
+    public ResponseEntity<DataResponseDto<HotStationDto>> getHotStation() {
+        return new ResponseEntity<>(stationService.getHotStation(), HttpStatus.OK);
     }
 
     /* 가까운 역 리스트 */
