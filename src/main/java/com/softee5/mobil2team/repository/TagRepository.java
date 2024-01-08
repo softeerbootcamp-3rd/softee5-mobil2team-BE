@@ -15,7 +15,7 @@ public interface TagRepository extends JpaRepository<Tag, Long> {
             "(select p.tag_id as tagId, count(tag_id) as count " +
             "from post p " +
             "where p.station_id = :id " +
-            "AND p.created_datetime >= CURRENT_TIMESTAMP - INTERVAL '5' DAY " +
+            "AND p.created_datetime >= CURRENT_TIMESTAMP - INTERVAL '2' HOUR " +
             "GROUP BY tag_id) as a " +
             "ON t.id = a.tagId " +
             "ORDER BY a.count desc", nativeQuery = true)
