@@ -19,11 +19,11 @@ public class StationService {
         return DataResponseDto.of(new BriefInfoDto(stationRepository.getBriefStationInfo()));
     }
 
-    public DataResponseDto<StationDto> getNearestStation(double x, double y) {
+    public DataResponseDto<NearStationDto> getNearestStation(double x, double y) {
         List<Long> nearStation = stationRepository.findNearestStations(x, y, 1);
         if (nearStation == null || nearStation.isEmpty())
             throw new GeneralException(ResponseCode.INTERNAL_ERROR);
-        return DataResponseDto.of(new StationDto(nearStation.get(0)));
+        return DataResponseDto.of(new NearStationDto(nearStation.get(0)));
     }
 
     public DataResponseDto<HotStationDto> getHotStation() {

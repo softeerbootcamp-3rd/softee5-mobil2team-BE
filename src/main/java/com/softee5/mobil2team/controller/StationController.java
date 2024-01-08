@@ -14,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.crypto.Data;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/station")
@@ -33,7 +31,8 @@ public class StationController {
     }
 
     @GetMapping("/near")
-    public ResponseEntity<DataResponseDto<StationDto>> getNearStation(
+    @Operation(summary = "가장 가까운 역", description = "현재 나의 좌표와 가장 가까운 역의 id")
+    public ResponseEntity<DataResponseDto<NearStationDto>> getNearStation(
             @RequestParam @Parameter(description = "현재 x좌표", required = true, example = "37.492817") Double x,
             @RequestParam @Parameter(description = "현재 y좌표", required = true, example = "127.013838") Double y
     ) {
@@ -43,6 +42,7 @@ public class StationController {
     }
 
     @GetMapping("/hot")
+    @Operation(summary = "핫한 역 정보", description = "최근 2시간 가장 글이 많이 올라온 역을 최대 3개까지 조회")
     public ResponseEntity<DataResponseDto<HotStationDto>> getHotStation() {
         return new ResponseEntity<>(stationService.getHotStation(), HttpStatus.OK);
     }
