@@ -19,6 +19,8 @@ public class ResponseDto {
 
     @Schema(description = "결과 메시지", example = "OK")
     private final String message;
+
+    @Schema(description = "페이징 정보")
     private final PageInfoDto pageInfoDto;
 
     public static ResponseDto of(Boolean success, ResponseCode code) {
