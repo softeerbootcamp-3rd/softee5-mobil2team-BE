@@ -18,5 +18,8 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     defer-datasource-initialization: true
 
+  mvc:
+    static-path-pattern: /static/**
+
 server:
   port: 80
