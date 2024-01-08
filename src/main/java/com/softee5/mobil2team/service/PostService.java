@@ -9,7 +9,6 @@ import com.softee5.mobil2team.repository.ImageRepository;
 import com.softee5.mobil2team.repository.PostRepository;
 import com.softee5.mobil2team.repository.StationRepository;
 import com.softee5.mobil2team.repository.TagRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,8 +30,22 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-    private static String[] nicknameFirst = { "졸린", "피곤한", "집 가고 싶은", "배고픈" };
-    private static String[] nicknameSecond = { "츄파춥스", "하이츄", "스니커즈", "황도 알맹이" };
+    private static String[][] nickname_modifier = {
+            { "출근하기 싫은", "연차 쓰고 싶은" },
+            { "칼퇴에 신난", "발걸음이 빨라진" },
+            { "야근으로 피곤한", "침대에 눕고 싶은" },
+            { "통학에 지친", "자취하고 싶은" },
+            { "밤새서 피곤한", "과제에 뒤덮인" },
+            { "늦잠자버린", "비몽사몽한" },
+            { "숙취에 찌든", "술에 취한" },
+            { "배고파서 어지러운", "배에서 소리나는" },
+            { "에어팟 끼고있는", "버즈 끼고있는" },
+            { "지옥철이 답답한", "당장 내리고 싶은" },
+            { "깜짝놀란", "생생정보통" }
+    };
+    private static String[] nickname_noun = {
+            "회사원", "대학생", "박명수", "정준하", "유재석", "하하", "정형돈", "노홍철", "광희", "짱구", "짱아"
+    };
 
     /* 글 업로드 */
     public DataResponseDto<Void> uploadPost(PostDto postDto) {
@@ -41,9 +54,10 @@ public class PostService {
 
         Random random = new Random();
         random.setSeed(System.currentTimeMillis());
-        int idx1 = random.nextInt(nicknameFirst.length);
-        int idx2 = random.nextInt(nicknameSecond.length);
-        String nickname = nicknameFirst[idx1] + " " + nicknameSecond[idx2];
+        int idx = postDto.getTagId() != null ? postDto.getTagId().intValue() - 1 : random.nextInt(11);
+        int idxModifier = random.nextInt(2);
+        int idxNoun = random.nextInt(nickname_noun.length);
+        String nickname = nickname_modifier[idx][idxModifier] + " " + nickname_noun[idxNoun];
 
         post.setNickname(nickname);
         post.setContent(postDto.getContent());
