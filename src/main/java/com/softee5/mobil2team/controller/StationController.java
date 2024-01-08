@@ -60,7 +60,9 @@ public class StationController {
 
     /* 역 별 태그 리스트 */
     @GetMapping("/tag/list")
-    public ResponseEntity<DataResponseDto<TagListDto>> getAllTags(@RequestParam(value = "id") Long id) {
+    @Operation(summary = "태그 리스트 조회", description = "각 역 별로 핫한 태그 리스트 순서 조회")
+    public ResponseEntity<DataResponseDto<TagListDto>> getAllTags(
+            @RequestParam(value = "id") @Parameter(description = "요청하는 역 ID", required = true, example = "3") Long id) {
         return new ResponseEntity<>(tagService.getTagList(id), HttpStatus.OK);
     }
 }
