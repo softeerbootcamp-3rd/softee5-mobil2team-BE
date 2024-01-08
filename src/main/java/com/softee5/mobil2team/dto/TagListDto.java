@@ -13,6 +13,6 @@ import java.util.List;
 @Schema(name = "Tag List Response")
 public class TagListDto {
 
-    @Schema(description = "역 별 태그 리스트 순서 정보")
+    @Schema(description = "역 별 태그 아이디 순서 정보")
     private List<Long> tags;
 }
