@@ -26,7 +26,7 @@ public class TagService {
     /* 역 별 태그 리스트 */
     public DataResponseDto<TagListDto> getTagList(Long id) {
         // stationID 예외처리
-        if (stationRepository.findById(id).isEmpty()) {
+        if (!stationRepository.existsById(id)) {
             throw new GeneralException(ResponseCode.BAD_REQUEST, "존재하지 않는 역 ID입니다.");
         }
 
