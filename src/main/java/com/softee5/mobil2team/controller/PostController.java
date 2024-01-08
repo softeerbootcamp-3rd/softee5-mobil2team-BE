@@ -4,6 +4,8 @@ import com.softee5.mobil2team.config.GeneralException;
 import com.softee5.mobil2team.config.ResponseCode;
 import com.softee5.mobil2team.dto.*;
 import com.softee5.mobil2team.service.PostService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -38,9 +40,10 @@ public class PostController {
 
     /* 좋아요 수 업데이트 */
     @PostMapping("/like")
+    @Operation(summary = "좋아요 수 업데이트", description = "해당 게시글의 좋아요 수 반영")
     public ResponseEntity<ResponseDto> updateLiked(
-            @RequestParam(value = "id") Long id,
-            @RequestParam(value = "count") int cnt) {
+            @RequestParam(value = "id") @Parameter(description = "게시글 ID", required = true, example = "83") Long id,
+            @RequestParam(value = "count") @Parameter(description = "증가할 좋아요 수", required = true, example = "4") int cnt) {
 
         if (postService.updateLiked(id, cnt)) {
             return new ResponseEntity<>(ResponseDto.of(true, ResponseCode.OK, "좋아요 수 업데이트 성공"), HttpStatus.OK);
