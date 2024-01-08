@@ -5,6 +5,9 @@ import com.softee5.mobil2team.config.ResponseCode;
 import com.softee5.mobil2team.dto.*;
 import com.softee5.mobil2team.service.StationService;
 import com.softee5.mobil2team.service.TagService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,7 @@ import javax.xml.crypto.Data;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/station")
+@Tag(name = "01. 역 관련 API", description = "지하철 역과 관련된 API들")
 public class StationController {
 
     @Autowired
@@ -23,14 +27,15 @@ public class StationController {
     private final TagService tagService;
 
     @GetMapping("/briefInfo")
+    @Operation(summary = "메인 페이지 로딩용 정보들", description = "전체 역 리스트 및 컨텐츠 현황 조회")
     public ResponseEntity<DataResponseDto<BriefInfoDto>> getBriefInfo() {
         return new ResponseEntity<>(stationService.getBriefInfo(), HttpStatus.OK);
     }
 
     @GetMapping("/near")
     public ResponseEntity<DataResponseDto<StationDto>> getNearStation(
-            @RequestParam Double x,
-            @RequestParam Double y
+            @RequestParam @Parameter(description = "현재 x좌표", required = true, example = "37.492817") Double x,
+            @RequestParam @Parameter(description = "현재 y좌표", required = true, example = "127.013838") Double y
     ) {
         if (x == null || y == null)
             throw new GeneralException(ResponseCode.BAD_REQUEST);
