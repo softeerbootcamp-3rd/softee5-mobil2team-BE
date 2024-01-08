@@ -10,6 +10,7 @@ import com.softee5.mobil2team.repository.PostRepository;
 import com.softee5.mobil2team.repository.StationRepository;
 import com.softee5.mobil2team.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,14 +19,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-@RequiredArgsConstructor
 @Service
 public class PostService {
 
-    private final StationRepository stationRepository;
-    private final TagRepository tagRepository;
-    private final ImageRepository imageRepository;
-    private final PostRepository postRepository;
+    @Autowired
+    private StationRepository stationRepository;
+    @Autowired
+    private TagRepository tagRepository;
+    @Autowired
+    private ImageRepository imageRepository;
+    @Autowired
+    private PostRepository postRepository;
 
     private static String[] nicknameFirst = { "졸린", "피곤한", "집 가고 싶은", "배고픈" };
     private static String[] nicknameSecond = { "츄파춥스", "하이츄", "스니커즈", "황도 알맹이" };
