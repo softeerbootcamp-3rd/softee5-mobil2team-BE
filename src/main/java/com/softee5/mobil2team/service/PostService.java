@@ -1,5 +1,7 @@
 package com.softee5.mobil2team.service;
 
+import com.softee5.mobil2team.config.GeneralException;
+import com.softee5.mobil2team.config.ResponseCode;
 import com.softee5.mobil2team.dto.*;
 import com.softee5.mobil2team.entity.Image;
 import com.softee5.mobil2team.entity.Post;
@@ -126,13 +128,23 @@ public class PostService {
 
     /* 게시글 리스트 조회 */
     public PageResponseDto<PostListDto> getPostList(Long stationId, Integer pageSize, Integer pageNumber, Long tagId) {
+        // stationID 예외처리
+        if (!stationRepository.existsById(stationId)) {
+            throw new GeneralException(ResponseCode.BAD_REQUEST, "존재하지 않는 역 ID입니다.");
+        }
+
+        // 페이지 넘버 예외처리
+        if(pageNumber <= 0) {
+            throw new GeneralException(ResponseCode.BAD_REQUEST, "잘못된 페이지 번호입니다.");
+        }
+
         /* pageable 객체 생성 */
-        Pageable pageable = PageRequest.of(pageNumber == 0 ? 0 : pageNumber - 1,
+        Pageable pageable = PageRequest.of(pageNumber - 1,
                 pageSize, Sort.by("createdDatetime").descending());
 
         // 현재 시간에서 24시간 전 계산
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR_OF_DAY, -72);
+        calendar.add(Calendar.HOUR_OF_DAY, -24);
         Date date = calendar.getTime();
 
 
