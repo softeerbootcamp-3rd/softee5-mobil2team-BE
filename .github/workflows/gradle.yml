@@ -106,4 +106,4 @@ jobs:
           docker rm $(docker ps -a -q -f status=created)
           docker rmi $(docker images -q)
           docker pull ${{ secrets.DOCKER_REPO }}
-          docker run -d -p 80:80 -v /home/${{ secrets.EC2_USERNAME }}/data:/data ${{ secrets.DOCKER_REPO }}
+          docker run -d -p 443:80 -p 80:80 -v /home/${{ secrets.EC2_USERNAME }}/data:/data ${{ secrets.DOCKER_REPO }} --name wagleServer
