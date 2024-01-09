@@ -77,11 +77,12 @@
 <img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/16e3f658-99d3-4458-bffc-9cb3f9d22d0a" width="20%" height="20%">
 
 ### 와글와글 글 쓰기
-<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/105a44e6-2c20-4786-b3da-ba7094f25b52" width="20%" height="20%">
-<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/6582f972-fa8f-4510-b3d0-79347805e686" width="20%" height="20%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/652599a8-a5b0-4ce0-a9ca-3f787af72357" width="20%" height="20%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/637e66c7-4340-44df-8129-e4f56197f795" width="20%" height="20%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/1aa154b0-bed8-4550-b72b-fe168fef7ffb" width="20%" height="20%">
 
 ### 와글와글 글 보기
-<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/a7a12413-8ed6-4b73-b273-b60ac3401c2e" width="20%" height="20%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/3ca3d145-f1a7-4728-aa48-7a43b62e37ac" width="20%" height="20%">
 
 ---
 ## 아키텍쳐 🛠️
