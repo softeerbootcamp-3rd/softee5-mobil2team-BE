@@ -72,22 +72,76 @@
 ## Pages 📺
 
 ### 홈화면
-<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/faf1c2ea-62af-42c4-af08-fc4ceb2930c2" width="20%" height="20%">
-<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/75587ce1-efe4-46dd-b8ba-328c8e0ff25b" width="20%" height="20%">
-<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/16e3f658-99d3-4458-bffc-9cb3f9d22d0a" width="20%" height="20%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/faf1c2ea-62af-42c4-af08-fc4ceb2930c2" width="22%" height="22%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/75587ce1-efe4-46dd-b8ba-328c8e0ff25b" width="22%" height="22%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/16e3f658-99d3-4458-bffc-9cb3f9d22d0a" width="22%" height="22%">
 
 ### 와글와글 글 쓰기
-<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/652599a8-a5b0-4ce0-a9ca-3f787af72357" width="20%" height="20%">
-<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/637e66c7-4340-44df-8129-e4f56197f795" width="20%" height="20%">
-<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/1aa154b0-bed8-4550-b72b-fe168fef7ffb" width="20%" height="20%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/652599a8-a5b0-4ce0-a9ca-3f787af72357" width="22%" height="22%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/637e66c7-4340-44df-8129-e4f56197f795" width="22%" height="22%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/1aa154b0-bed8-4550-b72b-fe168fef7ffb" width="22%" height="22%">
 
 ### 와글와글 글 보기
-<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/3ca3d145-f1a7-4728-aa48-7a43b62e37ac" width="20%" height="20%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/3ca3d145-f1a7-4728-aa48-7a43b62e37ac" width="22%" height="22%">
 
 ---
 ## 아키텍쳐 🛠️
 
-### 디렉토리 구조
+### ER Diagram
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/4c85a8af-f3df-481a-971d-3aad792e8a5f" width="75%" height="75%">
+
+### FrontEnd Directory Structure
+```bash
+├── README.md
+├── .gitignore
+├── build.sh
+├── index.html
+├── index.js
+├── package-lock.json
+├── package.json
+├── .github
+│   └── workflows
+│       └── deploy.yml
+├── JS
+│   ├── controllers
+│   │   ├── api
+│   │   ├── events
+│   │   ├── handlers
+│   │   ├── init
+│   │   ├── utils
+│   │   ├── render.js
+│   │   └── screenSizeHandler.js
+│   ├── views
+│   │   ├── components
+│   │   │   └── wagle
+│   │   └── pages
+│   ├── data.js
+│   ├── pages.js
+│   └── router.js
+├── SCSS
+│   ├── components
+│   │   ├── api
+│   │   ├── events
+│   │   ├── handlers
+│   │   ├── init
+│   │   ├── utils
+│   │   ├── render.js
+│   │   └── screenSizeHandler.js
+│   ├── pages
+│   │   ├── components
+│   │   │   └── wagle
+│   │   └── pages
+│   ├── reset.scss
+│   ├── style.scss
+│   └── variables.scss
+├── assets
+└── public
+    ├── pin
+    └── tag
+
+```
+
+### BackEnd Directory Structure
 ```bash
 ├── README.md
 ├── .gitignore
@@ -98,61 +152,26 @@
 ├── gradlew
 ├── gradlew.bat
 ├── settings.gradle
-├── .github : github actions
+├── .github
 │   └── workflows
 │       └── gradle.yml
-├── data : h2 data file
+├── data
 │   ├── demo.mv.db
 │   └── demo.trace.db
+├── document
+│   ├── ground_rule.md
+│   └── dictionary.md
 ├── gradlew
 │   └── wrapper
-│       ├── gradle-wrapper.jar
-│       └── gradle-wrapper.properties
 └── src
     ├── main
     │   ├── java/com/softee5/mobil2team
     │   │   ├── config
-    │   │   │   ├── ExceptionHandler.java
-    │   │   │   ├── GeneralException.java
-    │   │   │   ├── ResponseCode.java
-    │   │   │   ├── SwaggerConfig.java
-    │   │   │   └── WebConfig.java
     │   │   ├── controller
-    │   │   │   ├── PostController.java
-    │   │   │   ├── StationController.java
-    │   │   │   └── TestController.java
     │   │   ├── dto
-    │   │   │   ├── BriefInfoDto.java
-    │   │   │   ├── DataResponseDto.java
-    │   │   │   ├── ErrorResponseDto.java
-    │   │   │   ├── HotStationDto.java
-    │   │   │   ├── ImageDto.java
-    │   │   │   ├── ImageListDto.java
-    │   │   │   ├── NearStationDto.java
-    │   │   │   ├── PageInfoDto.java
-    │   │   │   ├── PageResponseDto.java
-    │   │   │   ├── PostDto.java
-    │   │   │   ├── PostInfoDto.java
-    │   │   │   ├── PostListDto.java
-    │   │   │   ├── ResponseDto.java
-    │   │   │   ├── StationListDto.java
-    │   │   │   ├── TagListDto.java
-    │   │   │   └── TestDto.java
     │   │   ├── entity
-    │   │   │   ├── Image.java
-    │   │   │   ├── Post.java
-    │   │   │   ├── Station.java
-    │   │   │   └── Tag.java
     │   │   ├── repository
-    │   │   │   ├── ImageRepository.java
-    │   │   │   ├── PostRepository.java
-    │   │   │   ├── StationRepository.java
-    │   │   │   └── TagRepository.java
     │   │   ├── service
-    │   │   │   ├── PostService.java
-    │   │   │   ├── StationService.java
-    │   │   │   ├── TagService.java
-    │   │   │   └── TestService.java
     │   │   └── Mobil2teamApplication.java
     │   └── resources
     │       ├── static
