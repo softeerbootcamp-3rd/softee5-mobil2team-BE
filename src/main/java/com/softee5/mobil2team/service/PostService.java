@@ -179,7 +179,7 @@ public class PostService {
         List<PostInfoDto> results = new ArrayList<>();
 
         for (Post p : postList) {
-            String imageUrl = p.getImage() != null ? p.getImage().getImageUrl() : null;
+            String imageUrl = p.getImage() != null ? p.getImage().getImageUrl() : p.getImageUrl();
             Long tag = p.getTag() != null ? p.getTag().getId() : null;
             PostInfoDto postInfoDto = new PostInfoDto(p.getId(), p.getNickname(), p.getCreatedDatetime(),
                     p.getContent(), imageUrl, tag, p.getLiked());
