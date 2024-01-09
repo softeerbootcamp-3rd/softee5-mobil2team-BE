@@ -90,14 +90,14 @@ public class PostService {
     }
 
     /* 좋아요 추가 */
-    public boolean updateLiked(Long id, int cnt) {
+    public boolean updateLiked(LikeDto likeDto) {
         // 게시글 id로 포스트 조회
-        Optional<Post> post = postRepository.findById(id);
+        Optional<Post> post = postRepository.findById(likeDto.getId());
 
         // 게시글 있을 경우 좋아요 수 업데이트
         if (post.isPresent()) {
             int liked = post.get().getLiked();
-            post.get().setLiked(liked + cnt);
+            post.get().setLiked(liked + likeDto.getCount());
 
             postRepository.save(post.get());
 
