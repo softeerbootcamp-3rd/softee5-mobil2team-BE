@@ -1,5 +1,10 @@
 package com.softee5.mobil2team.service;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.softee5.mobil2team.config.GeneralException;
 import com.softee5.mobil2team.config.ResponseCode;
 import com.softee5.mobil2team.dto.*;
@@ -12,12 +17,15 @@ import com.softee5.mobil2team.repository.PostRepository;
 import com.softee5.mobil2team.repository.StationRepository;
 import com.softee5.mobil2team.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,11 +35,14 @@ public class PostService {
     @Autowired
     private StationRepository stationRepository;
     @Autowired
-    private TagRepository tagRepository;
-    @Autowired
     private ImageRepository imageRepository;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private AmazonS3 amazonS3;
+
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
 
     private static String[][] nickname_modifier = {
             { "출근하기 싫은", "연차 쓰고 싶은" },
@@ -51,28 +62,54 @@ public class PostService {
     };
 
     /* 글 업로드 */
-    public DataResponseDto<Void> uploadPost(PostDto postDto) {
+    public DataResponseDto<Void> uploadPost(PostDto postDto, MultipartFile file) {
 
-        Post post = new Post();
+        try {
+            Post post = new Post();
 
-        Random random = new Random();
-        random.setSeed(System.currentTimeMillis());
-        int idx = postDto.getTagId() != null ? postDto.getTagId().intValue() - 1 : random.nextInt(11);
-        int idxModifier = random.nextInt(2);
-        int idxNoun = random.nextInt(nickname_noun.length);
-        String nickname = nickname_modifier[idx][idxModifier] + " " + nickname_noun[idxNoun];
+            // 이미지 s3에 저장
+            String imageUrl = null;
+            if (file != null && !file.isEmpty()) {
+                imageUrl = saveFile(file);
+            }
 
-        post.setNickname(nickname);
-        post.setContent(postDto.getContent());
-        post.setLiked(0);
+            Random random = new Random();
+            random.setSeed(System.currentTimeMillis());
+            int idx = postDto.getTagId() != null ? postDto.getTagId().intValue() - 1 : random.nextInt(11);
+            int idxModifier = random.nextInt(2);
+            int idxNoun = random.nextInt(nickname_noun.length);
+            String nickname = nickname_modifier[idx][idxModifier] + " " + nickname_noun[idxNoun];
 
-        post.setStation(Station.builder().id(postDto.getStationId()).build()); // 필수
-        post.setTag(postDto.getTagId() != null ? Tag.builder().id(postDto.getTagId()).build() : null); // 선택
-        post.setImage(postDto.getImageId() != null ? Image.builder().id(postDto.getImageId()).build() : null); // 선택
+            post.setNickname(nickname);
+            post.setContent(postDto.getContent());
+            post.setLiked(0);
 
-        postRepository.save(post);
+            post.setStation(Station.builder().id(postDto.getStationId()).build()); // 필수
+            post.setTag(postDto.getTagId() != null ? Tag.builder().id(postDto.getTagId()).build() : null); // 선택
+            post.setImage(postDto.getImageId() != null ? Image.builder().id(postDto.getImageId()).build() : null); // 선택
+            post.setImageUrl(imageUrl);
 
-        return DataResponseDto.of(null);
+            postRepository.save(post);
+
+            return DataResponseDto.of(null);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+    }
+
+    private String saveFile(MultipartFile file) throws IOException {
+        String originalFilename = file.getOriginalFilename();
+
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(file.getSize());
+        metadata.setContentType(file.getContentType());
+
+        amazonS3.putObject(
+                new PutObjectRequest(bucket, originalFilename, file.getInputStream(), metadata)
+                        .withCannedAcl(CannedAccessControlList.PublicRead)
+        );
+        return amazonS3.getUrl(bucket, originalFilename).toString();
     }
 
     /* 이미지 리스트 조회 */
@@ -152,4 +189,5 @@ public class PostService {
         PageInfoDto pageInfoDto = new PageInfoDto(pageNumber, pageSize, postList.getTotalElements(), postList.getTotalPages());
         return PageResponseDto.of(new PostListDto(results), pageInfoDto);
     }
+
 }
