@@ -9,8 +9,10 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,11 +23,12 @@ public class PostController {
     private final PostService postService;
 
     /* 글 업로드 */
-    @PostMapping("/upload")
+    @PostMapping(value = "/upload", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     @Operation(summary = "글 업로드", description = "특정 지하철 역에 해당하는 글 작성")
-    public ResponseEntity<DataResponseDto<Void>> uploadPost(@RequestBody PostDto postDto) {
+    public ResponseEntity<DataResponseDto<Void>> uploadPost(@RequestPart PostDto postDto,
+                                                            @RequestPart(required = false) MultipartFile imageFile) {
         return new ResponseEntity<>(
-                postService.uploadPost(postDto),
+                postService.uploadPost(postDto, imageFile),
                 HttpStatus.OK
         );
     }

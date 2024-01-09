@@ -82,3 +82,4 @@ fabric.properties
 build/
 *.pem
 files/
+src/main/resources/application-secret.yml
