@@ -4,7 +4,7 @@
 
 <br/>
 
-![waglewagle_logo](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/31c5a700-1f29-4d5d-8c28-8eff1ec9acb9)
+<img width="519" alt="로고_다크" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/296637fd-3424-414d-b020-dd34f2ab43ea">
 
 <br/>
 
@@ -164,7 +164,8 @@
 │   └── demo.trace.db
 ├── document
 │   ├── ground_rule.md
-│   └── dictionary.md
+│   ├── dictionary.md
+│   └── trouble_shooting.md
 ├── gradlew
 │   └── wrapper
 └── src
@@ -204,6 +205,6 @@
 ### 팀원 소개
 |      기획       |          디자인         |      개발(FE)         |      개발(FE,BE)       |          개발(FE,BE)         |       개발(BE)         |                                                                                                            
 | :------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|   <img width="160px" src="https://avatars.githubusercontent.com/u/155419724?v=4" />    |                      <img width="160px" src="" />    |                   <img width="160px" src="https://avatars.githubusercontent.com/u/87116017?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/43667241?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/90602694?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/48647199?v=4"/>   |
-|   [@yunnamkyeong](https://github.com/yunnamkyeong)   |    [@]()  | [@Sang-minKIM](https://github.com/Sang-minKIM)  | [@insiderhj](https://github.com/insiderhj)  | [@SuHyeon00](https://github.com/SuHyeon00)  | [@h-sooah](https://github.com/h-sooah)  |
+|   <img width="160px" src="https://avatars.githubusercontent.com/u/155419724?v=4" />    |                      <img width="160px" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/76612e34-3d8c-4253-afd1-492d416624ef" />    |                   <img width="160px" src="https://avatars.githubusercontent.com/u/87116017?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/43667241?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/90602694?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/48647199?v=4"/>   |
+|   [@yunnamkyeong](https://github.com/yunnamkyeong)   |    [Naeun Kim](https://www.behance.net/torytory7576fe)  | [@Sang-minKIM](https://github.com/Sang-minKIM)  | [@insiderhj](https://github.com/insiderhj)  | [@SuHyeon00](https://github.com/SuHyeon00)  | [@h-sooah](https://github.com/h-sooah)  |
 | 윤남경 | 김나은 | 김상민 | 김희진 | 오수현 | 한수아 |
