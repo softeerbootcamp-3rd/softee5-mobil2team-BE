@@ -301,3 +301,100 @@ post.setImage(postDto.getImageId() != null ? Image.builder().id(postDto.getImage
 - 각 엔티티 클래스에 `@Builder` 설정
 - `findById` 대신 **id**와 **Builder**를 사용해 객체를 생성
 - 추가적으로, 코드의 간결함을 위해 if문 대신 삼항연산자 이용
+
+<br/>
+
+### [ SpringBoot ] 도메인 주소와 HTTPS 설정하기
+#### Ver 1.
+```yaml
+server:
+  port: 80
+```
+- 기존에는 서버 포트를 80으로 설정해, HTTP로만 접근 가능
+
+#### Ver 2.
+##### (1) 도메인 주소 구매
+( 가비아 이미지 추가하기 )
+
+- 가비아에서 도메인 구매
+
+##### (2) AWS Route 53
+<img width="1250" alt="image" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/d056f550-6744-4dca-ae50-fe4c2a5c8b96">
+
+- AWS의 **Route 53**에서 구매한 도메인 이름을 바탕으로 호스팅 영역 생성하기
+
+##### (3) 구입한 도메인 설정
+( 가비아 이미지 추가하기 )
+<img width="1174" alt="image" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/5b928f6c-45ae-4dcc-95d8-bd824465068f">
+
+- 가비아에서 구입한 도메인의 네임서버(1~4차)를, AWS에서 생성한 호스팅 영역에서 NS 레코드의 라우팅 대상 값으로 대체 (마지막의 '.'은 포함 x)
+- 소유자 인증 완료
+
+##### (4) SSL(TLS)를 위한 인증서 발급
+<img width="1285" alt="image" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/fdfa7fe4-fb5c-4297-9e7a-8654b5c4624e">
+
+- AWS의 **Certificate Manager** 에서 도메인 이름으로 인증서 발급 받기
+- ! CNAME 레코드 생성하기
+  - 발급 받은 인증서의 `Route 53에서 레코드 생성` 버튼을 통해 레코드 생성
+  - 인증서 발급 대기: 최대 2시간까지는 기다려보기
+
+##### (5) EC2 인스턴스의 인바운드 규칙 설정
+<img width="1046" alt="image" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/6eb93aaf-224a-4013-b5a7-56fe6a95b3fa">
+
+- Port `443` : Anywhere-IPv4, Anywhere-IPv6 설정
+- Port `80` : Anywhere-IPv4, Anywhere-IPv6 설정
+
+##### (6) Target Group 생성
+- AWS의 **Load Balancing** 에서 타겟 그룹 생성
+  - Port 번호를 `80` 으로 설정
+  - VPC는 EC2 인스턴스와 동일하게
+  - Health Check Path 설정 : 항상 200을 response하는 API
+  - 사용할 EC2 인스턴스와 포트번호 설정 후 타겟 그룹에 추가
+  - 타겟 그룹 생성
+
+##### (7) Load Balancer 생성
+- VPC : EC2 인스턴스가 사용하는 VPC
+- Network Mapping : 최소 2개의 Ability Zone 설정
+  - Subnet: EC2 인스턴스가 사용하는 Subnet (private이 아닌 public이어야 함)
+- 보안 그룹 : EC2 인스턴스가 사용하는 보안 그룹
+- Port `443` 과 `80` 에 대한 리스너 생성
+  - Forward to 에 타겟 그룹 설정
+  - 발급 받은 인증서 적용
+
+##### (8) 도메인 레코드 생성 - A 레코드
+- AWS의 **Route 53** 에서 생성한 호스팅 영역에서, `레코드 생성`을 통해 A 레코드 생성
+  - 레코드 이름(서브 도메인) 사용은 선택
+  - 별칭 체크는 필수
+  - 트래픽 라우팅 대상은 생성한 Load Balancer로 지정
+
+##### (9) Load Balancer의 리스너 규칙 추가
+- Port `443`과 `80`에 대한 리스너 각각 존재
+- 각 리스너에서 규칙 편집
+  - 전달 대상은 생성한 타겟 그룹, 100%로 지정
+
+##### (10) Health Check
+- AWS의 EC2 > Load Balancing > **Target Group** 에서 생성한 타겟 그룹의 Health Status 확인
+- `Health checks` 탭에서 설정 수정
+  - 프로토콜, URI(Path), Success Code 설정
+  - [ `80`, "/test", 200 ] 과 [ `443`, "/test", 200 ] 으로 지정
+- Health Check 확인 후 이상 없으면 HTTPS 적용해서 확인해보기
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
