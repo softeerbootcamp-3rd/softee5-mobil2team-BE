@@ -1,7 +1,10 @@
 # 👨‍👩‍👧‍👦 와글와글 (Wagle Wagle)
 
 <div align="center">
-<img width="329" alt="Wagle" src=".png">
+
+![waglewagle_logo](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/31c5a700-1f29-4d5d-8c28-8eff1ec9acb9)
+
+<br/>
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fsofteerbootcamp-3nd%2Fsoftee5-mobil2team-BE&count_bg=%23203A40&title_bg=%23BCC1CD&icon=&icon_color=%23FFFFFF&title=hits&edge_flat=true)](https://hits.seeyoufarm.com)
 
@@ -42,6 +45,11 @@
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white)
 ![Github](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white)             
 
+### FrontEnd
+![HTML5](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![javascript](https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white)
+
 ### BackEnd
 ![SpringBoot](https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=Springboot&logoColor=white)
 ![H2](https://img.shields.io/badge/H2-4479A1?style=for-the-badge&logo=H2&logoColor=white)
@@ -56,12 +64,25 @@
 ### Communication
 ![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white)
 ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white)
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
 
 ---
 ## Pages 📺
 
+### 홈화면
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/faf1c2ea-62af-42c4-af08-fc4ceb2930c2" width="20%" height="20%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/75587ce1-efe4-46dd-b8ba-328c8e0ff25b" width="20%" height="20%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/16e3f658-99d3-4458-bffc-9cb3f9d22d0a" width="20%" height="20%">
+
+### 와글와글 글 쓰기
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/105a44e6-2c20-4786-b3da-ba7094f25b52" width="20%" height="20%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/6582f972-fa8f-4510-b3d0-79347805e686" width="20%" height="20%">
+
+### 와글와글 글 보기
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/a7a12413-8ed6-4b73-b273-b60ac3401c2e" width="20%" height="20%">
+
 ---
-## 아키텍쳐
+## 아키텍쳐 🛠️
 
 ### 디렉토리 구조
 ```bash
@@ -138,7 +159,23 @@
 
 ```
 
-```
--->
+---
 
-## 개발팀 소개
+## 팀 소개 🌿
+
+### 우리 팀의 협업
+
+👩🏻‍💻 [모빌2팀의 그라운드 룰]()
+
+📁 [API 문서(Swagger)](http://13.209.90.251/swagger-ui/index.html)
+
+🧑‍🏫 [용어 사전]()
+
+<br/>
+
+### 팀원 소개
+|      기획       |          디자인         |      개발(FE)         |      개발(FE,BE)       |          개발(FE,BE)         |       개발(BE)         |                                                                                                            
+| :------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|   <img width="160px" src="https://avatars.githubusercontent.com/u/155419724?v=4" />    |                      <img width="160px" src="" />    |                   <img width="160px" src="https://avatars.githubusercontent.com/u/87116017?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/43667241?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/90602694?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/48647199?v=4"/>   |
+|   [@yunnamkyeong](https://github.com/yunnamkyeong)   |    [@]()  | [@Sang-minKIM](https://github.com/Sang-minKIM)  | [@insiderhj](https://github.com/insiderhj)  | [@SuHyeon00](https://github.com/SuHyeon00)  | [@h-sooah](https://github.com/h-sooah)  |
+| 윤남경 | 김나은 | 김상민 | 김희진 | 오수현 | 한수아 |
