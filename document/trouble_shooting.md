@@ -182,3 +182,77 @@ public class Mobil2teamApplication {
 - `Ver 1.` 방법의 에러를 해결하는 대신, 새로운 방법으로 배포 결정: Docker 사용
 - 빌드 파일을 통해 도커 이미지를 생성한 후, 도커 허브에 이를 Push
 - 호스트 서버에서 해당 이미지를 pull 받은 후 컨테이너를 실행하는 방식으로 최종 배포
+
+<br/>
+
+### [ SpringBoot ] 지하철 역 별로 많이 쓰이는 태그 리스트 순서를 반환하는 기능
+#### Ver 1.
+```java
+/* 역 별 태그 리스트 */
+public DataResponseDto<TagListDto> getTagList(Long id) {
+    // tag 목록 전체 조회
+    List<Tag> tagList = tagRepository.findAll();
+
+    // 현재 시간에서 2시간 전 계산
+    Calendar calendar = Calendar.getInstance();
+    calendar.add(Calendar.HOUR_OF_DAY, -2);
+    Date date = calendar.getTime();
+
+    // 2시간 전 ~ 현재 시간까지 작성된 글 리스트 불러오기
+    List<Post> posts = postRepository.findAllByStationIdAndCreatedDatetimeAfter(id, date);
+
+    List<TagDto> results = new ArrayList<>();
+
+    // 게시글이 있는 경우
+    if(!posts.isEmpty()) {
+        // 태그별 카운팅
+        Map<Tag, Long> tagCountMap = posts.stream()
+                .collect(Collectors.groupingBy(Post::getTag, Collectors.counting()));
+
+        // 태그 오름차순으로 정렬
+        results.addAll(tagCountMap.entrySet().stream()
+                .sorted((tag1, tag2) -> {
+                    // 카운트 수 높은 순으로 정렬
+                    int compareByCount = tag2.getValue().compareTo(tag1.getValue());
+
+                    // 카운트 수 동일할 경우 id 오름차순으로 정렬
+                    if (compareByCount == 0) {
+                        return Long.compare(tag1.getKey().getId(), tag2.getKey().getId());
+                    }
+                    return compareByCount;
+                })
+                .map(tag -> new TagDto(tag.getKey().getId(), tag.getKey().getName()))
+                .toList());
+    }
+
+    // 남은 tag 추가
+    for (Tag t : tagList) {
+        TagDto dto = new TagDto(t.getId(), t.getName());
+        if(!results.contains(dto)) {
+            results.add(dto);
+        }
+    }
+
+    return DataResponseDto.of(new TagListDto(results));
+}
+```
+- 서비스 단에서 필요한 정보 데이터베이스 조회하며 로직 구성
+
+##### 문제 상황
+- 데이터베이스에서 불러온 엔티티를 DTO로 변경하는 과정을 중복적으로 처리함
+- 데이터베이스 조회를 여러번 사용함
+
+#### Ver 2.
+```java
+@Query(value = "SELECT t.id from tag t " +
+        "left outer join " +
+        "(select p.tag_id as tagId, count(tag_id) as count " +
+        "from post p " +
+        "where p.station_id = :id " +
+        "AND p.created_datetime >= CURRENT_TIMESTAMP - INTERVAL '5' DAY " +
+        "GROUP BY tag_id) as a " +
+        "ON t.id = a.tagId " +
+        "ORDER BY a.count desc", nativeQuery = true)
+List<Long> getTagList(@Param("id") Long id);
+```
+- tag 테이블과 post 테이블을 조인하여 태그 리스트 순서를 반환하는 쿼리로 로직 수정
