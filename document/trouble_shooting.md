@@ -256,3 +256,48 @@ public DataResponseDto<TagListDto> getTagList(Long id) {
 List<Long> getTagList(@Param("id") Long id);
 ```
 - tag 테이블과 post 테이블을 조인하여 태그 리스트 순서를 반환하는 쿼리로 로직 수정
+
+<br/>
+
+### [ SpringBoot ] select query를 여러 번 사용한 코드
+#### Ver 1.
+```java
+Station station = stationRepository.findById(postDto.getStationId()).orElse(null);
+Tag tag = tagRepository.findById(postDto.getTagId()).orElse(null);
+Image image;
+if (postDto.getImageId() != null) {
+   image = imageRepository.findById(postDto.getImageId()).orElse(null);
+} else {
+   image = null;
+}
+post.setStation(station);
+post.setTag(tag);
+post.setImage(image);
+```
+- **Post** 엔티티에 **Station**, **Tag**, **Image** 엔티티가 `@ManyToOne` 으로 연결되어 있는 상황
+- Post 객체를 save하기 위해서는 해당 객체에 Station, Tag, Image 객체 설정이 필요
+
+##### 문제 상황
+- Station, Tag, Image 객체를 찾기 위해 select query를 반복적으로 실행 -> 비효율적으로 느껴짐
+
+##### Ver 2.
+```java
+@Entity
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Image {
+    ...
+}
+```
+```java
+post.setStation(Station.builder().id(postDto.getStationId()).build());
+post.setTag(postDto.getTagId() != null ? Tag.builder().id(postDto.getTagId()).build() : null);
+post.setImage(postDto.getImageId() != null ? Image.builder().id(postDto.getImageId()).build() : null);
+```
+- select query 대신 Builder 활용
+- 각 엔티티 클래스에 `@Builder` 설정
+- `findById` 대신 **id**와 **Builder**를 사용해 객체를 생성
+- 추가적으로, 코드의 간결함을 위해 if문 대신 삼항연산자 이용
