@@ -92,7 +92,7 @@
 ## 아키텍쳐 🛠️
 
 ### ER Diagram
-<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/4c85a8af-f3df-481a-971d-3aad792e8a5f" width="75%" height="75%">
+<img src = "https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/f292fd9e-a285-4b68-a955-fc1be83a5d44" width="75%" height="75%">
 
 ### FrontEnd Directory Structure
 ```bash
