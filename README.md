@@ -2,6 +2,8 @@
 
 <div align="center">
 
+<br/>
+
 ![waglewagle_logo](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/31c5a700-1f29-4d5d-8c28-8eff1ec9acb9)
 
 <br/>
@@ -165,11 +167,11 @@
 
 ### 우리 팀의 협업
 
-👩🏻‍💻 [모빌2팀의 그라운드 룰]()
+👩🏻‍💻 [모빌2팀의 그라운드 룰](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/blob/dev/document/ground_rule.md)
 
 📁 [API 문서(Swagger)](http://13.209.90.251/swagger-ui/index.html)
 
-🧑‍🏫 [용어 사전]()
+🧑‍🏫 [용어 사전](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/blob/dev/document/dictionary.md)
 
 <br/>
 
