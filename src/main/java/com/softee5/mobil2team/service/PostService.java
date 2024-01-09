@@ -62,7 +62,32 @@ public class PostService {
     };
 
     /* 글 업로드 */
-    public DataResponseDto<Void> uploadPost(PostDto postDto, MultipartFile file) {
+    public DataResponseDto<Void> uploadPost(PostDto postDto) {
+        Post post = new Post();
+
+        Random random = new Random();
+        random.setSeed(System.currentTimeMillis());
+        int idx = postDto.getTagId() != null ? postDto.getTagId().intValue() - 1 : random.nextInt(11);
+        int idxModifier = random.nextInt(2);
+        int idxNoun = random.nextInt(nickname_noun.length);
+        String nickname = nickname_modifier[idx][idxModifier] + " " + nickname_noun[idxNoun];
+
+        post.setNickname(nickname);
+        post.setContent(postDto.getContent());
+        post.setLiked(0);
+
+        post.setStation(Station.builder().id(postDto.getStationId()).build()); // 필수
+        post.setTag(postDto.getTagId() != null ? Tag.builder().id(postDto.getTagId()).build() : null); // 선택
+        post.setImage(postDto.getImageId() != null ? Image.builder().id(postDto.getImageId()).build() : null); // 선택
+
+        postRepository.save(post);
+
+        return DataResponseDto.of(null);
+    }
+
+
+    /* 사진 첨부 글 업로드 */
+    public DataResponseDto<Void> uploadPostWithImage(PostDto postDto, MultipartFile file) {
 
         try {
             Post post = new Post();
@@ -87,7 +112,7 @@ public class PostService {
             post.setStation(Station.builder().id(postDto.getStationId()).build()); // 필수
             post.setTag(postDto.getTagId() != null ? Tag.builder().id(postDto.getTagId()).build() : null); // 선택
             post.setImage(postDto.getImageId() != null ? Image.builder().id(postDto.getImageId()).build() : null); // 선택
-            post.setImageUrl(imageUrl);
+//            post.setImageUrl(imageUrl);
 
             postRepository.save(post);
 
@@ -179,7 +204,7 @@ public class PostService {
         List<PostInfoDto> results = new ArrayList<>();
 
         for (Post p : postList) {
-            String imageUrl = p.getImage() != null ? p.getImage().getImageUrl() : p.getImageUrl();
+            String imageUrl = p.getImage() != null ? p.getImage().getImageUrl() : null;
             Long tag = p.getTag() != null ? p.getTag().getId() : null;
             PostInfoDto postInfoDto = new PostInfoDto(p.getId(), p.getNickname(), p.getCreatedDatetime(),
                     p.getContent(), imageUrl, tag, p.getLiked());

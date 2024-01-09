@@ -23,12 +23,21 @@ public class PostController {
     private final PostService postService;
 
     /* 글 업로드 */
-    @PostMapping(value = "/upload", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping("/upload")
     @Operation(summary = "글 업로드", description = "특정 지하철 역에 해당하는 글 작성")
-    public ResponseEntity<DataResponseDto<Void>> uploadPost(@RequestPart PostDto postDto,
+    public ResponseEntity<DataResponseDto<Void>> uploadPost(@RequestBody PostDto postDto) {
+        return new ResponseEntity<>(
+                postService.uploadPost(postDto),
+                HttpStatus.OK
+        );
+    }
+
+    /* 사진 첨부 글 업로드 */
+    @PostMapping(value = "/upload/image", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<DataResponseDto<Void>> uploadPostWithImage (@RequestPart PostDto postDto,
                                                             @RequestPart(required = false) MultipartFile imageFile) {
         return new ResponseEntity<>(
-                postService.uploadPost(postDto, imageFile),
+                postService.uploadPostWithImage(postDto, imageFile),
                 HttpStatus.OK
         );
     }

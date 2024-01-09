@@ -43,8 +43,8 @@ public class Post {
     @Column(name = "liked", nullable = false)
     private Integer liked;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+//    @Column(name = "image_url")
+//    private String imageUrl;
 
     @PrePersist
     protected void onCreate() {
