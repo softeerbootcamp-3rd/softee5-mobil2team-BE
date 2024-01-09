@@ -43,6 +43,12 @@ jobs:
          restore-keys: |
            ${{ runner.os }}-gradle-
 
+    - name: Create application-secret.yml
+      run: |
+        touch ./src/main/resources/application-secret.yml 
+        echo "${{ secrets.APPLICATION_SECRET }}" > ./src/main/resources/application-secret.yml
+      shell: bash
+
     # Grant Permission to gradle wrapper
     # gradle wrapper = 개발자가 특정 버전의 gradle을 미리 설치하지 않고도 gradle 빌드를 실행할 수 있게 해주는 편리한 도구
     - name: Grant execute permission for gradlew
