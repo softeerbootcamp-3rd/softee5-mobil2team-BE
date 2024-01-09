@@ -197,6 +197,8 @@
 
 🧑‍🏫 [용어 사전](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/blob/dev/document/dictionary.md)
 
+📎 [트러블 슈팅](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/blob/dev/document/trouble_shooting.md)
+
 <br/>
 
 ### 팀원 소개
