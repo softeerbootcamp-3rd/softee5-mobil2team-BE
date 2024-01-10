@@ -314,7 +314,8 @@ server:
 
 #### Ver 2.
 ##### (1) 도메인 주소 구매
-( 가비아 이미지 추가하기 )
+<img width="1334" alt="image" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/4ae6cbcf-bf77-4764-871c-193fc469a3bb">
+
 
 - 가비아에서 도메인 구매
 
@@ -324,7 +325,8 @@ server:
 - AWS의 **Route 53**에서 구매한 도메인 이름을 바탕으로 호스팅 영역 생성하기
 
 ##### (3) 구입한 도메인 설정
-( 가비아 이미지 추가하기 )
+<img width="1106" alt="image" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/255f83e5-b776-4cd9-8501-282c59dfdcb1">
+
 <img width="1174" alt="image" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/5b928f6c-45ae-4dcc-95d8-bd824465068f">
 
 - 가비아에서 구입한 도메인의 네임서버(1~4차)를, AWS에서 생성한 호스팅 영역에서 NS 레코드의 라우팅 대상 값으로 대체 (마지막의 '.'은 포함 x)
@@ -345,6 +347,9 @@ server:
 - Port `80` : Anywhere-IPv4, Anywhere-IPv6 설정
 
 ##### (6) Target Group 생성
+<img width="1051" alt="image" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/e41297cb-53b7-48bb-937d-8534e63df2b1">
+
+
 - AWS의 **Load Balancing** 에서 타겟 그룹 생성
   - Port 번호를 `80` 으로 설정
   - VPC는 EC2 인스턴스와 동일하게
@@ -353,6 +358,8 @@ server:
   - 타겟 그룹 생성
 
 ##### (7) Load Balancer 생성
+<img width="1280" alt="image" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/51a52c6c-700a-4552-9bf1-c11bed2f3664">
+
 - VPC : EC2 인스턴스가 사용하는 VPC
 - Network Mapping : 최소 2개의 Ability Zone 설정
   - Subnet: EC2 인스턴스가 사용하는 Subnet (private이 아닌 public이어야 함)
@@ -362,23 +369,37 @@ server:
   - 발급 받은 인증서 적용
 
 ##### (8) 도메인 레코드 생성 - A 레코드
+<img width="1233" alt="image" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/02cd0b22-789f-4310-85c3-020e765d4dea">
+
+
 - AWS의 **Route 53** 에서 생성한 호스팅 영역에서, `레코드 생성`을 통해 A 레코드 생성
   - 레코드 이름(서브 도메인) 사용은 선택
   - 별칭 체크는 필수
   - 트래픽 라우팅 대상은 생성한 Load Balancer로 지정
 
 ##### (9) Load Balancer의 리스너 규칙 추가
+<img width="1068" alt="image" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/47c03af9-d4ac-4016-b74b-45731559acc1">
+
 - Port `443`과 `80`에 대한 리스너 각각 존재
 - 각 리스너에서 규칙 편집
   - 전달 대상은 생성한 타겟 그룹, 100%로 지정
 
 ##### (10) Health Check
+<img width="1058" alt="image" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/3d724cef-b703-42ae-8674-58a5b604c625">
+
 - AWS의 EC2 > Load Balancing > **Target Group** 에서 생성한 타겟 그룹의 Health Status 확인
 - `Health checks` 탭에서 설정 수정
   - 프로토콜, URI(Path), Success Code 설정
   - [ `80`, "/test", 200 ] 과 [ `443`, "/test", 200 ] 으로 지정
-- Health Check 확인 후 이상 없으면 HTTPS 적용해서 확인해보기
+- Health Check 에서 `Healthy`가 뜨는지 확인
 
+##### (11) Server URL mapping
+```yaml
+server:
+  url: https://api.waglewagle.store
+```
+- **application.yml** 에 위 코드 추가
+- 끝 !!!!!!
 
 
 
