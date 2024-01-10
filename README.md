@@ -124,13 +124,10 @@
 │   └── router.js
 ├── SCSS
 │   ├── components
-│   │   ├── api
-│   │   ├── events
-│   │   ├── handlers
-│   │   ├── init
-│   │   ├── utils
-│   │   ├── render.js
-│   │   └── screenSizeHandler.js
+│   │   ├── btn.scss
+│   │   ├── card.scss
+│   │   ├── station.scss
+│   │   └── tag.scss
 │   ├── pages
 │   │   ├── components
 │   │   │   └── wagle
@@ -138,7 +135,6 @@
 │   ├── reset.scss
 │   ├── style.scss
 │   └── variables.scss
-├── assets
 └── public
     ├── pin
     └── tag
