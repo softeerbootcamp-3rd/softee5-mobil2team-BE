@@ -67,7 +67,7 @@ public class PostService {
 
         Random random = new Random();
         random.setSeed(System.currentTimeMillis());
-        int idx = postDto.getTagId() != null ? postDto.getTagId().intValue() - 1 : random.nextInt(11);
+        int idx = postDto.getTagId() != null && postDto.getTagId() != 0 ? postDto.getTagId().intValue() - 1 : random.nextInt(11);
         int idxModifier = random.nextInt(2);
         int idxNoun = random.nextInt(nickname_noun.length);
         String nickname = nickname_modifier[idx][idxModifier] + " " + nickname_noun[idxNoun];
@@ -77,7 +77,7 @@ public class PostService {
         post.setLiked(0);
 
         post.setStation(Station.builder().id(postDto.getStationId()).build()); // 필수
-        post.setTag(postDto.getTagId() != null ? Tag.builder().id(postDto.getTagId()).build() : null); // 선택
+        post.setTag(postDto.getTagId() != null && postDto.getTagId() != 0 ? Tag.builder().id(postDto.getTagId()).build() : null); // 선택
         post.setImage(postDto.getImageId() != null ? Image.builder().id(postDto.getImageId()).build() : null); // 선택
 
         postRepository.save(post);
@@ -100,7 +100,7 @@ public class PostService {
 
             Random random = new Random();
             random.setSeed(System.currentTimeMillis());
-            int idx = postDto.getTagId() != null ? postDto.getTagId().intValue() - 1 : random.nextInt(11);
+            int idx = postDto.getTagId() != null && postDto.getTagId() != 0 ? postDto.getTagId().intValue() - 1 : random.nextInt(11);
             int idxModifier = random.nextInt(2);
             int idxNoun = random.nextInt(nickname_noun.length);
             String nickname = nickname_modifier[idx][idxModifier] + " " + nickname_noun[idxNoun];
@@ -110,7 +110,7 @@ public class PostService {
             post.setLiked(0);
 
             post.setStation(Station.builder().id(postDto.getStationId()).build()); // 필수
-            post.setTag(postDto.getTagId() != null ? Tag.builder().id(postDto.getTagId()).build() : null); // 선택
+            post.setTag(postDto.getTagId() != null && postDto.getTagId() != 0 ? Tag.builder().id(postDto.getTagId()).build() : null); // 선택
             post.setImage(postDto.getImageId() != null ? Image.builder().id(postDto.getImageId()).build() : null); // 선택
 //            post.setImageUrl(imageUrl);
 
