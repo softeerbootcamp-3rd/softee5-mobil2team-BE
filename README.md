@@ -12,10 +12,33 @@
 
 </div>
 
-
 ## Deploy ✨
 - **FE** : [https://mobil2team-fe.vercel.app/](https://mobil2team-fe.vercel.app/)<br>
 - **BE** : [https://api.waglewagle.store/](https://api.waglewagle.store/)<br>
+
+<br/>
+
+## Our Team 🌿
+
+### 우리 팀의 협업
+
+👩🏻‍💻 [모빌2팀의 그라운드 룰](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/blob/dev/document/ground_rule.md)
+
+📁 [API 문서(Swagger)](http://13.209.90.251/swagger-ui/index.html)
+
+🧑‍🏫 [용어 사전](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/blob/dev/document/dictionary.md)
+
+📎 [트러블 슈팅](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/blob/dev/document/trouble_shooting.md)
+
+<br/>
+
+### 팀원 소개
+|      기획       |          디자인         |      개발(FE)         |      개발(FE,BE)       |          개발(FE,BE)         |       개발(BE)         |                                                                                                            
+| :------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|   <img width="160px" src="https://avatars.githubusercontent.com/u/155419724?v=4" />    |                      <img width="160px" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/76612e34-3d8c-4253-afd1-492d416624ef" />    |                   <img width="160px" src="https://avatars.githubusercontent.com/u/87116017?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/43667241?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/90602694?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/48647199?v=4"/>   |
+|   [@yunnamkyeong](https://github.com/yunnamkyeong)   |    [Naeun Kim](https://www.behance.net/torytory7576fe)  | [@Sang-minKIM](https://github.com/Sang-minKIM)  | [@insiderhj](https://github.com/insiderhj)  | [@SuHyeon00](https://github.com/SuHyeon00)  | [@h-sooah](https://github.com/h-sooah)  |
+| 윤남경 | 김나은 | 김상민 | 김희진 | 오수현 | 한수아 |
+
 
 <br/>
 
@@ -181,25 +204,3 @@
 
 ```
 
----
-
-## 팀 소개 🌿
-
-### 우리 팀의 협업
-
-👩🏻‍💻 [모빌2팀의 그라운드 룰](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/blob/dev/document/ground_rule.md)
-
-📁 [API 문서(Swagger)](http://13.209.90.251/swagger-ui/index.html)
-
-🧑‍🏫 [용어 사전](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/blob/dev/document/dictionary.md)
-
-📎 [트러블 슈팅](https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/blob/dev/document/trouble_shooting.md)
-
-<br/>
-
-### 팀원 소개
-|      기획       |          디자인         |      개발(FE)         |      개발(FE,BE)       |          개발(FE,BE)         |       개발(BE)         |                                                                                                            
-| :------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|   <img width="160px" src="https://avatars.githubusercontent.com/u/155419724?v=4" />    |                      <img width="160px" src="https://github.com/softeerbootcamp-3nd/softee5-mobil2team-BE/assets/48647199/76612e34-3d8c-4253-afd1-492d416624ef" />    |                   <img width="160px" src="https://avatars.githubusercontent.com/u/87116017?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/43667241?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/90602694?v=4"/>   |                   <img width="160px" src="https://avatars.githubusercontent.com/u/48647199?v=4"/>   |
-|   [@yunnamkyeong](https://github.com/yunnamkyeong)   |    [Naeun Kim](https://www.behance.net/torytory7576fe)  | [@Sang-minKIM](https://github.com/Sang-minKIM)  | [@insiderhj](https://github.com/insiderhj)  | [@SuHyeon00](https://github.com/SuHyeon00)  | [@h-sooah](https://github.com/h-sooah)  |
-| 윤남경 | 김나은 | 김상민 | 김희진 | 오수현 | 한수아 |
