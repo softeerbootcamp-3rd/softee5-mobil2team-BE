@@ -77,3 +77,9 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 .DS_Store
+.gradle/
+.idea/
+build/
+*.pem
+files/
+src/main/resources/application-secret.yml
