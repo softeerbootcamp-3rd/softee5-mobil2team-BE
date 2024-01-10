@@ -78,7 +78,7 @@ public class PostService {
 
         post.setStation(Station.builder().id(postDto.getStationId()).build()); // 필수
         post.setTag(postDto.getTagId() != null && postDto.getTagId() != 0 ? Tag.builder().id(postDto.getTagId()).build() : null); // 선택
-        post.setImage(postDto.getImageId() != null ? Image.builder().id(postDto.getImageId()).build() : null); // 선택
+        post.setImage(postDto.getImageId() != null && postDto.getImageId() != 0 ? Image.builder().id(postDto.getImageId()).build() : null); // 선택
 
         postRepository.save(post);
 
@@ -111,7 +111,7 @@ public class PostService {
 
             post.setStation(Station.builder().id(postDto.getStationId()).build()); // 필수
             post.setTag(postDto.getTagId() != null && postDto.getTagId() != 0 ? Tag.builder().id(postDto.getTagId()).build() : null); // 선택
-            post.setImage(postDto.getImageId() != null ? Image.builder().id(postDto.getImageId()).build() : null); // 선택
+            post.setImage(postDto.getImageId() != null && postDto.getImageId() != 0 ? Image.builder().id(postDto.getImageId()).build() : null); // 선택
 //            post.setImageUrl(imageUrl);
 
             postRepository.save(post);
