@@ -185,9 +185,9 @@ public class PostService {
         Pageable pageable = PageRequest.of(pageNumber - 1,
                 pageSize, Sort.by("createdDatetime").descending());
 
-        // 현재 시간에서 24시간 전 계산
+        // 현재 시간에서 24시간 전 계산 -> 168시간으로 임시 수정
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR_OF_DAY, -24);
+        calendar.add(Calendar.HOUR_OF_DAY, -168);
         Date date = calendar.getTime();
 
 
