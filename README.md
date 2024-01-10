@@ -15,7 +15,7 @@
 
 ## Deploy ✨
 - **FE** : [https://mobil2team-fe.vercel.app/](https://mobil2team-fe.vercel.app/)<br>
-- **BE** : [http://13.209.90.251:80/](http://13.209.90.251:80/)<br>
+- **BE** : [https://api.waglewagle.store/](https://api.waglewagle.store/)<br>
 
 <br/>
 
@@ -49,7 +49,7 @@
 
 ### FrontEnd
 ![HTML5](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![SASS](https://img.shields.io/badge/SASS-CC6699?style=for-the-badge&logo=sass&logoColor=white)
 ![javascript](https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white)
 
 ### BackEnd
@@ -150,7 +150,6 @@
 ├── README.md
 ├── .gitignore
 ├── Dockerfile
-├── HELP.md
 ├── LICENSE
 ├── build.gradle
 ├── gradlew
